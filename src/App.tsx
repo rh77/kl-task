@@ -12,7 +12,7 @@ class App extends Component {
         <header className="app__header">
           <div className="app__link-container">
             <a className="app__link" href="#welcome">Welcome</a>
-            <a className="app__link" href="#users">Users list</a>
+            <a className="app__link" href="#users">Users</a>
           </div>
         </header>
         <Router>

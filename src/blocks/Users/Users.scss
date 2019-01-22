@@ -1,5 +1,91 @@
-.view-switcher {
+.users-header {
+    &__panel {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
 
+    &__search {
+        width: 70%;
+        float: left;
+    }
+    
+    &__layout-switcher {
+        
+        width: 30%;
+        float: right;
+    }
+}
+
+$scrollbar-width: 17px;
+
+.switcher {
+    padding: 4px;
+    padding-right: $scrollbar-width + 4px;
+    display: flex;
+    justify-content: flex-end;
+
+    & *{ 
+        margin: 8px;
+    }
+
+    &__button{
+        width: 32px;
+        height: 32px;
+        background-repeat: no-repeat;
+        background-size: contain;
+        display: inline-block;
+        cursor: pointer;
+        opacity: 0.2;
+
+        &:hover {
+            opacity: 0.6;
+        }
+
+        &_active {
+            opacity: 1;
+        }
+
+        &_type_tile {
+            background-image: url("../../img/tile-view.svg"); 
+        }
+
+        &_type_group {
+            background-image: url("../../img/group-view.svg"); 
+        }
+
+        &_type_table {
+            background-image: url("../../img/table-view.svg"); 
+        }
+    }
+}
+
+.search {
+    display: flex;
+    justify-content: flex-start;
+    align-items: baseline;
+    padding-left: 2ch;
+    padding-top: 8px;
+
+    &__input,
+    &__label {
+        font-size: 1.5rem;
+    }
+
+    &__label {
+        padding-right: 1ch;
+        color: rgb(87, 87, 87);
+    }
+
+    &__input {
+        outline: none;
+        border: 2px solid lightgray;
+        padding-left: 0.5ch;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    }
 }
 
 $odd-color: white;

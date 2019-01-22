@@ -2,11 +2,15 @@ $scrollbar-width: 17px;
 
 .app {
   text-align: center;
+  min-width: 600px;
+  overflow: auto;
 
   &__header {
     background-color: #282c34;
     height: 20vmin;
     width: 100vw;
+    min-width: 600px;
+    overflow: auto;
     display: table-cell;
     vertical-align: bottom;
     font-size: calc(10px + 2vmin);
