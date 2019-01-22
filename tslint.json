@@ -1,4 +1,10 @@
 {
     "extends": ["tslint:latest", "tslint-react"],
-    "linterOptions": {"exclude": ["node_modules/**/*.ts"]}
+    "linterOptions": {"exclude": ["node_modules/**/*.ts"]},
+    "rules": {
+        "quotemark": [
+            false
+        ],
+        "no-trailing-whitespace": false
+    }
 }

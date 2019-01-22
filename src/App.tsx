@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.scss';
+import Route from './blocks/Routing/Route';
+import Router from './blocks/Routing/Router';
+import Users from './blocks/Users';
+import Welcome from './blocks/Welcome';
+import logo from './logo.svg';
 
 class App extends Component {
-  render() {
+  public render(): JSX.Element {
     return (
       <div className="App">
         <header className="App-header">
@@ -20,6 +24,10 @@ class App extends Component {
             Learn React
           </a>
         </header>
+        <Router>
+          <Route path="welcome" block={Welcome}/>
+          <Route path="users" block={Users}/>
+        </Router>
       </div>
     );
   }
