@@ -1,20 +1,21 @@
+$scrollbar-width: 17px;
+
 .app {
   text-align: center;
 
   &__header {
     background-color: #282c34;
-    height: 200px;
+    height: 20vmin;
     width: 100vw;
     display: table-cell;
-    text-align: center;
     vertical-align: bottom;
-    justify-content: center;
     font-size: calc(10px + 2vmin);
     color: white;
   }
 
   &__link-container {
-    height: calc(20px + 1em);
+    padding-right: $scrollbar-width;
+    height: 1.7em;
   }
 
   &__link {
