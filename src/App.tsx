@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import './App.scss';
 import Route from './blocks/Routing/Route';
 import Router from './blocks/Routing/Router';
-import Users from './blocks/Users';
-import Welcome from './blocks/Welcome';
+import Users from './blocks/Users/Users';
+import Welcome from './blocks/Welcome/Welcome';
 
 class App extends Component {
   public render(): JSX.Element {
