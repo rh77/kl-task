@@ -25,7 +25,7 @@ class App extends Component {
           </a>
         </header>
         <Router>
-          <Route path="welcome" block={Welcome}/>
+          <Route path="welcome" showWhenEmpty={true} block={Welcome}/>
           <Route path="users" block={Users}/>
         </Router>
       </div>
