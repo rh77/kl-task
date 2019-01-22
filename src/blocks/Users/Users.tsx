@@ -53,7 +53,8 @@ const Line = (props: { valueObject: number, isUnmanaged: boolean}): JSX.Element 
 const Search = (): JSX.Element => {
   return (
       <div className="search">
-        <label className="search__label">Search:</label><input className="search__input" type="search" placeholder="text" />
+        <label className="search__label">Search:</label>
+        <input className="search__input" type="search" placeholder="text" />
       </div>);
 };
 

@@ -45,6 +45,10 @@ $scrollbar-width: 17px;
 
         &_active {
             opacity: 1;
+            
+            &:hover {
+                opacity: 1;
+            }
         }
 
         &_type_tile {
