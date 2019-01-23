@@ -5,6 +5,7 @@
         "quotemark": [
             false
         ],
-        "no-trailing-whitespace": false
+        "no-trailing-whitespace": false,
+        "trailing-comma": false
     }
 }
