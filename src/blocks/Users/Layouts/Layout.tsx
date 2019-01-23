@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import ViewType from "../Enums/ViewType";
 import IUsersProps from '../Props/IUsersProps';
-import './Groups.scss';
 import GroupsLayout from './GroupsLayout';
-import TableLayout from './TableLayout';
-import "./Tiles.scss";
-import TilesLayout from './TilesLayout';
 import ILayoutStrategy from './ILayoutStrategy';
+import TableLayout from './TableLayout';
+import TilesLayout from './TilesLayout';
 
 class Layout extends Component<IUsersProps> {
     private data: number[];
