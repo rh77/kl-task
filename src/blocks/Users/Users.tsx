@@ -64,7 +64,8 @@ const UsersLayout = (props: { viewType: ViewType }): JSX.Element => {
 
     case ViewType.Tile:
     default:
-      const placeHolders = new Array(10).fill(0);
+      // todo: replace whith grid layout when IE supports it
+      const placeHolders = new Array(10).fill(0); 
       return (
             <div className="users-container__content-panel">
               <ul className="user-tiles">
