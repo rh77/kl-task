@@ -151,8 +151,11 @@ $tile-height: 300px;
     display: flex;
     flex-flow: row wrap;
     list-style: none;
-    padding-inline-start: $big-blocks-offset;
-    padding-inline-end: $big-blocks-offset;
+    padding-inline-start: 0;
+    padding-inline-end: 0;
+    padding-left: $big-blocks-offset;
+    padding-right: $big-blocks-offset;
+    
     margin-block-start: 0;
 
     &__tile {
