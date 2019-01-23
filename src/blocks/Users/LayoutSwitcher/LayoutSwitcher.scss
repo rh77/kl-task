@@ -1,0 +1,45 @@
+@import "../../variables.scss";
+
+.switcher {
+    display: inline-block;
+    justify-content: flex-start;
+    padding-top: 3px; 
+
+    & > *{ 
+        margin: 0 $small-blocks-offset 0 $small-blocks-offset;
+    }
+
+    &__button{
+        width: 32px;
+        height: 32px;
+        background-repeat: no-repeat;
+        background-size: contain;
+        display: inline-block;
+        cursor: pointer;
+        opacity: 0.2;
+
+        &:hover {
+            opacity: 0.6;
+        }
+
+        &_active {
+            opacity: 1;
+
+            &:hover {
+                opacity: 1;
+            }
+        }
+
+        &_type_tile {
+            background-image: url("./img/tile-view.svg"); 
+        }
+
+        &_type_group {
+            background-image: url("./img/group-view.svg"); 
+        }
+
+        &_type_table {
+            background-image: url("./img/table-view.svg"); 
+        }
+    }
+}

@@ -1,0 +1,25 @@
+@import "../../variables.scss";
+
+.search {
+    display: inline-block;
+    align-items: baseline;
+
+    &__input,
+    &__label {
+        font-size: calc(#{$min-font-size} + 1vmin);
+    }
+
+    &__label {
+        padding-right: 1ch;
+        color: rgb(87, 87, 87);
+    }
+
+    &__input {
+        outline: none;
+        border: 2px solid lightgray;
+        padding-left: 0.5ch;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    }
+}

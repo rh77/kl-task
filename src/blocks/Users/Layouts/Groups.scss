@@ -1,0 +1,27 @@
+@import "../../variables.scss";
+
+$group-width: 200px;
+$group-height: 300px;
+
+.user-groups {
+    list-style: none;
+    column-gap: 2em;
+    columns: 5;
+    column-fill: balance;
+    margin: 0;
+    padding: $big-blocks-offset;
+    margin-bottom: $big-blocks-offset;
+
+    &__group {
+        display: flex;
+        flex-direction: row;
+        width: $group-width;
+        height: $group-height;
+        background-color: aliceblue;
+        margin-bottom: 2em;
+
+        &:last-of-type {
+            margin-bottom: 0;
+        }
+    }
+}

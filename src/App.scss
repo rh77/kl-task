@@ -1,3 +1,5 @@
+@import "./blocks/variables.scss";
+
 .app {
   text-align: center;
   min-width: 600px;
@@ -11,7 +13,7 @@
     overflow: auto;
     display: table-cell;
     vertical-align: bottom;
-    font-size: calc(10px + 2vmin);
+    font-size: calc(#{$min-font-size} + 2vmin);
     color: white;
   }
 

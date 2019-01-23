@@ -1,0 +1,29 @@
+@import "../../variables.scss";
+
+$odd-color: white;
+$even-color: rgb(245, 245, 245);
+
+$unmanaged-odd-color: aliceblue;
+$unmanaged-even-color: rgb(223, 232, 240);
+
+.users-table {
+    display: table;
+    width: 100%;
+
+    &__cell {
+        display: table-row;
+        background-color: $odd-color;
+
+        &:nth-child(2n) {
+            background-color: $even-color;
+        }
+
+        &_unmanaged {
+            background-color: $unmanaged-odd-color;
+
+            &:nth-child(2n) {
+                background-color: $unmanaged-even-color;
+            }
+        }
+    }
+}

@@ -1,0 +1,38 @@
+@import "../../variables.scss";
+
+$tile-width: 200px;
+$tile-height: 300px;
+
+.user-tiles {
+    display: flex;
+    flex-flow: row wrap;
+    list-style: none;
+    padding-inline-start: 0;
+    padding-inline-end: 0;
+    padding-left: $big-blocks-offset;
+    padding-right: $big-blocks-offset;
+    
+    margin-block-start: 0;
+
+    &__tile {
+        display: flex;
+        flex-basis: $tile-width;
+        flex-grow: 1;
+        flex-direction: column;
+        background-color: bisque;
+        width: $tile-width;
+        height: $tile-height;
+        margin: 1em;
+    }
+
+    &__placeholder {
+        content: "";
+        display: flex;
+        flex-basis: $tile-width;
+        flex-grow: 1;
+        width: $tile-width;
+        height: 0;
+        margin-left: 1em;
+        margin-right: 1em;
+    }
+}
