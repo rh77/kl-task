@@ -1,4 +1,4 @@
-import {ObjectMapper} from 'json-object-mapper';
+import buildUserModels from './userDataBuilder';
 import UserModel from './userModel';
 
 const singletonEnforcer = Symbol();
@@ -14,6 +14,18 @@ export default class UserDataProvider {
         }
     }
 
+    public static get instance(): UserDataProvider {
+
+        if (!this[singleton]) {
+            this[singleton] = new UserDataProvider(singletonEnforcer);
+        }
+
+        return this[singleton];
+    }
+
+// tslint:disable-next-line: no-empty
+    public static set instance(value: UserDataProvider) {}
+
     public get userData() {
         return this.data || [];
     }
@@ -27,13 +39,7 @@ export default class UserDataProvider {
         
         UserDataProvider.downloadString(url)
                 .then((result: string) => {
-                    const array = JSON.parse(result);
-                    const userData = 
-                                array
-                                    .filter((item: any) => item.id)
-                                    .map((item: any) => ObjectMapper.deserialize(UserModel, item));
-
-                    this.data = userData;
+                    this.data = buildUserModels(result);
                     this.onDataReady();
                 })
                 .catch((error: Error) => {
@@ -41,18 +47,6 @@ export default class UserDataProvider {
                     this.data = void 0;
                 });
     }
-
-    public static get instance(): UserDataProvider {
-
-        if (!this[singleton]) {
-            this[singleton] = new UserDataProvider(singletonEnforcer);
-        }
-
-        return this[singleton];
-    }
-
-// tslint:disable-next-line: no-empty
-    public static set instance(value: UserDataProvider) {}
 
 // tslint:disable-next-line: member-ordering
     private static async downloadString(url: string): Promise<string> {
@@ -79,6 +73,6 @@ export default class UserDataProvider {
             };
         
             request.send();
-          });
+        });
     }
 }

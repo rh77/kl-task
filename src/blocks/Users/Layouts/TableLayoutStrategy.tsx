@@ -2,6 +2,7 @@ import React from 'react';
 import UserModel from '../../../model/userModel';
 import ILayoutStrategy from './ILayoutStrategy';
 import "./Table.scss";
+import groups from '../../../model/groups';
 
 export default class TableLayoutStrategy implements ILayoutStrategy {
     private data: UserModel[] = [];
@@ -18,14 +19,23 @@ export default class TableLayoutStrategy implements ILayoutStrategy {
     }
 
     private renderLine(key: string, value: UserModel): JSX.Element {
-        return <Line key={key} valueObject={value} isUnmanaged={value.id!.indexOf('5') >= 10}/>;
+        return <Line key={key} valueObject={value} isUnmanaged={value.groupId === 0}/>;
     }
 }
 
 const Line = (props: { valueObject: UserModel, isUnmanaged: boolean}): JSX.Element => {
+
     const classes = 
-          "users-table__cell " 
-           + (props.isUnmanaged ? "users-table__cell_unmanaged" : "");
-    const line = <div className={classes}>{props.valueObject.id}</div>;
+          "users-table__row " 
+           + (props.isUnmanaged ? "users-table__row_unmanaged" : "");
+    const line = (
+            <div className={classes}>
+                <div className="users-table__cell">{props.valueObject.name}</div>
+                <div className="users-table__cell">{props.valueObject.company}</div>
+                <div className="users-table__cell">{props.valueObject.email}</div>
+                <div className="users-table__cell">{props.valueObject.group}</div>
+                <div className="users-table__cell">{props.valueObject.phone}</div>
+            </div>);
+
     return line;
 };

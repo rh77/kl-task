@@ -10,7 +10,7 @@ $unmanaged-even-color: rgb(223, 232, 240);
     display: table;
     width: 100%;
 
-    &__cell {
+    &__row {
         display: table-row;
         background-color: $odd-color;
 
@@ -25,5 +25,9 @@ $unmanaged-even-color: rgb(223, 232, 240);
                 background-color: $unmanaged-even-color;
             }
         }
+    }
+
+    &__cell {
+        display: table-cell;       
     }
 }

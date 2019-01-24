@@ -34,5 +34,5 @@ export default class TilesLayoutStrategy implements ILayoutStrategy {
 }
   
 const Tile = (props: { valueObject: UserModel }): JSX.Element => {
-    return <li className="user-tiles__tile">{props.valueObject.id}</li>;
+    return <li className="user-tiles__tile">{props.valueObject.name}</li>;
 };

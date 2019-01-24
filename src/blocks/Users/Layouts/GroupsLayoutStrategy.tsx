@@ -3,7 +3,7 @@ import UserModel from '../../../model/userModel';
 import "./Groups.scss";
 import ILayoutStrategy from './ILayoutStrategy';
 
-type UserGroup = [number, UserModel[]];
+type UserGroup = [string, UserModel[]];
 
 export default class GroupsLayoutStrategy implements ILayoutStrategy {
     
@@ -13,11 +13,11 @@ export default class GroupsLayoutStrategy implements ILayoutStrategy {
 
         for (const userModel of data) {
 
-            const userGroups = this.groups.filter((group: UserGroup) => group[0] === userModel.groupId);
+            const userGroups = this.groups.filter((group: UserGroup) => group[0] === userModel.group);
 
             let userGroup: UserGroup;
             if (userGroups.length === 0) {
-                userGroup = [userModel.groupId || 0, []];
+                userGroup = [userModel.group, []];
                 this.groups.push(userGroup);
             } else {
                 userGroup = userGroups[0];
@@ -34,7 +34,7 @@ export default class GroupsLayoutStrategy implements ILayoutStrategy {
                 </ul>);
     }
 
-    private renderGroup(key: number, value: UserGroup): JSX.Element {
+    private renderGroup(key: string, value: UserGroup): JSX.Element {
         return <Group key={key} valueObject={value}/>;
     }
 }
