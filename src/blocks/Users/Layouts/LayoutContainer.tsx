@@ -1,24 +1,34 @@
 import React, { Component } from 'react';
+import UserDataProvider from '../../../userDataProvider';
 import ViewType from "../Enums/ViewType";
-import IUsersProps from '../Props/IUsersProps';
+import ILayoutTypeProps from '../Props/ILayoutTypeProps';
 import GroupsLayout from './GroupsLayout';
 import ILayoutStrategy from './ILayoutStrategy';
 import TableLayout from './TableLayout';
 import TilesLayout from './TilesLayout';
 
-class Layout extends Component<IUsersProps> {
-    private data: number[];
-    private tableLayout: TableLayout;
-    private groupsLayout: GroupsLayout;
-    private tilesLayout: TilesLayout;
+interface ILayoutDataState {
+    data: any[];
+}
 
-    constructor(props: IUsersProps) {
+class LayoutContainer extends Component<ILayoutTypeProps, ILayoutDataState> {
+
+    private tableLayout: ILayoutStrategy;
+    private groupsLayout: ILayoutStrategy;
+    private tilesLayout: ILayoutStrategy;
+
+    constructor(props: ILayoutTypeProps) {
         super(props);
 
-        this.data = [];
-        for (let i = 1; i < 9; i++) {
-            this.data.push(i);
-        }
+        this.state = {
+            data: UserDataProvider.instance.userData
+        };
+
+        UserDataProvider.instance.onDataReady = () => {
+            this.setState({
+                data: UserDataProvider.instance.userData
+            });
+        };
 
         this.tableLayout = new TableLayout();
         this.groupsLayout = new GroupsLayout();
@@ -43,10 +53,10 @@ class Layout extends Component<IUsersProps> {
     private renderLayout(layout: ILayoutStrategy): JSX.Element {
         return (
             <div className="users-container__content-panel">
-                {layout.render(this.data)}
+                {layout.render(this.state.data.map(user => user.id))}
             </div>
         );
     }
 }
 
-export default Layout;
+export default LayoutContainer;

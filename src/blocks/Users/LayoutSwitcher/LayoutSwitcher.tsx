@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import ViewType from "../Enums/ViewType";
-import IUsersProps from "../Props/IUsersProps";
+import ILayoutTypeProps from "../Props/ILayoutTypeProps";
 import "./LayoutSwitcher.scss";
 
-export interface ISwitcherProps extends IUsersProps {
+export interface ISwitcherProps extends ILayoutTypeProps {
     onSwitch: (viewType: ViewType) => void;
 }
   

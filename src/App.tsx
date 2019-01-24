@@ -4,8 +4,15 @@ import Route from './blocks/Routing/Route';
 import Router from './blocks/Routing/Router';
 import Users from './blocks/Users/Users';
 import Welcome from './blocks/Welcome/Welcome';
+import UserDataProvider from './userDataProvider';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    UserDataProvider.instance.requestUsersData("https://api.myjson.com/bins/z1hb8");
+  }
+
   public render(): JSX.Element {
     return (
       <div className="app">

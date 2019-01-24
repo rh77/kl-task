@@ -7,7 +7,7 @@ export default class GroupsLayout implements ILayoutStrategy {
     public render(data: any[]) {
         return (
                 <ul className="user-groups">
-                    {data.map((val: number) => this.renderGroup(val, val))}
+                    {data.map((val: any) => this.renderGroup(val, val))}
                 </ul>);
     }
 
@@ -16,6 +16,6 @@ export default class GroupsLayout implements ILayoutStrategy {
     }
 }
   
-const Group = (props: { valueObject: number }): JSX.Element => {
+const Group = (props: { valueObject: any }): JSX.Element => {
     return <li className="user-groups__group">{props.valueObject}</li>;
 };

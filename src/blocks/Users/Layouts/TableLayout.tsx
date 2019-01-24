@@ -7,16 +7,16 @@ export default class TableLayout implements ILayoutStrategy {
     public render(data: any[]) {
         return (
             <div className="users-table">
-                {data.map((val: number) => this.renderLine(val, val))}
+                {data.map((val: any) => this.renderLine(val, val))}
             </div>);
     }
 
     private renderLine(key: any, value: any): JSX.Element {
-        return <Line key={key} valueObject={value} isUnmanaged={value === 5 || value === 6}/>;
+        return <Line key={key} valueObject={value} isUnmanaged={value.toString().indexOf('5') >= 10}/>;
     }
 }
 
-const Line = (props: { valueObject: number, isUnmanaged: boolean}): JSX.Element => {
+const Line = (props: { valueObject: any, isUnmanaged: boolean}): JSX.Element => {
     const classes = 
           "users-table__cell " 
            + (props.isUnmanaged ? "users-table__cell_unmanaged" : "");

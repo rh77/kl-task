@@ -1,5 +1,5 @@
 import ViewType from "../Enums/ViewType";
 
-export default interface IUsersProps {
+export default interface ILayoutTypeProps {
     viewType: ViewType;
 }

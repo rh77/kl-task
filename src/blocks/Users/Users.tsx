@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import ViewType from "./Enums/ViewType";
-import Layout from "./Layouts/Layout";
+import LayoutContainer from "./Layouts/LayoutContainer";
 import LayoutSwitcher from "./LayoutSwitcher/LayoutSwitcher";
-import IUsersProps from "./Props/IUsersProps";
+import ILayoutTypeProps from "./Props/ILayoutTypeProps";
 import Search from './Search/Search';
 import './Users.scss';
 
-export interface IUsersState {
+interface ILayoutTypeState {
   viewType: ViewType;
 }
 
-class Users extends Component<IUsersProps, IUsersState> {
-  constructor(props: IUsersProps) {
+class Users extends Component<ILayoutTypeProps, ILayoutTypeState> {
+  constructor(props: ILayoutTypeProps) {
     super(props);
 
     this.state = {
@@ -28,7 +28,7 @@ class Users extends Component<IUsersProps, IUsersState> {
           <Search/>
           <LayoutSwitcher viewType={this.state.viewType} onSwitch={this.handleSwitch}/>
         </div>
-        <Layout viewType={this.state.viewType}/>
+        <LayoutContainer viewType={this.state.viewType}/>
       </div>
     );
   }
