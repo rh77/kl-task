@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import UserDataProvider from '../../../userDataProvider';
+import UserDataProvider from '../../../model/userDataProvider';
+import UserModel from '../../../model/userModel';
 import ViewType from "../Enums/ViewType";
 import ILayoutTypeProps from '../Props/ILayoutTypeProps';
-import GroupsLayout from './GroupsLayout';
+import GroupsLayoutStrategy from './GroupsLayoutStrategy';
 import ILayoutStrategy from './ILayoutStrategy';
-import TableLayout from './TableLayout';
-import TilesLayout from './TilesLayout';
+import TableLayoutStrategy from './TableLayoutStrategy';
+import TilesLayoutStrategy from './TilesLayoutStrategy';
 
 interface ILayoutDataState {
-    data: any[];
+    data: UserModel[];
 }
 
 class LayoutContainer extends Component<ILayoutTypeProps, ILayoutDataState> {
@@ -30,9 +31,9 @@ class LayoutContainer extends Component<ILayoutTypeProps, ILayoutDataState> {
             });
         };
 
-        this.tableLayout = new TableLayout();
-        this.groupsLayout = new GroupsLayout();
-        this.tilesLayout = new TilesLayout();
+        this.tableLayout = new TableLayoutStrategy();
+        this.groupsLayout = new GroupsLayoutStrategy();
+        this.tilesLayout = new TilesLayoutStrategy();
     }
     
     public render() {
@@ -51,7 +52,7 @@ class LayoutContainer extends Component<ILayoutTypeProps, ILayoutDataState> {
     }
 
     private renderLayout(layout: ILayoutStrategy): JSX.Element {
-        layout.setup(this.state.data.map(user => user.id));
+        layout.setup(this.state.data);
         return (
             <div className="users-container__content-panel">
                 {layout.render()}

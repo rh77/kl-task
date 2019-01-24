@@ -20,7 +20,9 @@
     "jsx": "preserve",
     "sourceMap": true,
     "noImplicitAny": false, 
-    "preserveConstEnums": true
+    "preserveConstEnums": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   },
   "include": [
     "src"

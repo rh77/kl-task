@@ -1,8 +1,9 @@
 import React from 'react';
+import UserModel from '../../../model/userModel';
 
 export default interface ILayoutStrategy {
 
     render(): JSX.Element;
 
-    setup(data: any[]): void;
+    setup(data: UserModel[]): void;
 }

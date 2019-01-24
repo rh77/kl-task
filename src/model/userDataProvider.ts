@@ -1,8 +1,11 @@
+import {ObjectMapper} from 'json-object-mapper';
+import UserModel from './userModel';
+
 const singletonEnforcer = Symbol();
 const singleton = Symbol();
 
 export default class UserDataProvider {
-    private data?: any[];
+    private data?: UserModel[];
 
     constructor(enforcer: symbol) {
         
@@ -20,14 +23,22 @@ export default class UserDataProvider {
 
     public requestUsersData(url: string): void {
 
-        this.downloadUsers(url)
-                .then((value: any[]) => {
-                    this.data = value;
+        this.data = void 0;
+        
+        UserDataProvider.downloadString(url)
+                .then((result: string) => {
+                    const array = JSON.parse(result);
+                    const userData = 
+                                array
+                                    .filter((item: any) => item.id)
+                                    .map((item: any) => ObjectMapper.deserialize(UserModel, item));
+
+                    this.data = userData;
                     this.onDataReady();
                 })
                 .catch((error: Error) => {
                     alert(error.message);
-                    this.data = undefined;
+                    this.data = void 0;
                 });
     }
 
@@ -43,7 +54,8 @@ export default class UserDataProvider {
 // tslint:disable-next-line: no-empty
     public static set instance(value: UserDataProvider) {}
 
-    private async downloadUsers(url: string): Promise<any[]> {
+// tslint:disable-next-line: member-ordering
+    private static async downloadString(url: string): Promise<string> {
         return new Promise((resolve, reject) => {
 
             const request = new XMLHttpRequest();
@@ -53,19 +65,17 @@ export default class UserDataProvider {
 
                 if (this.status === 200) {
 
-                    const array = JSON.parse(this.response);
-                    resolve(array);
+                    resolve(this.response);
 
                 } else {
-                    
-                    const error = new Error(this.statusText);
-                    error.message += " :" + this.status;
+                   
+                    const error = new Error(`Status: ${this.statusText}. Code: ${this.status}`);
                     reject(error);
                 }
             };
         
             request.onerror = () => {
-              reject(new Error("Failed to download users"));
+                reject(new Error("Failed to download string. Ready state was: " + request.readyState));
             };
         
             request.send();

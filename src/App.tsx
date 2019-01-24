@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import "reflect-metadata";
 import './App.scss';
 import Route from './blocks/Routing/Route';
 import Router from './blocks/Routing/Router';
 import Users from './blocks/Users/Users';
 import Welcome from './blocks/Welcome/Welcome';
-import UserDataProvider from './userDataProvider';
+import UserDataProvider from './model/userDataProvider';
 
 class App extends Component {
   constructor(props) {
