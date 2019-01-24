@@ -3,11 +3,16 @@ import "./Groups.scss";
 import ILayoutStrategy from './ILayoutStrategy';
 
 export default class GroupsLayout implements ILayoutStrategy {
+    private data: any[] = [];
 
-    public render(data: any[]) {
+    public setup(data: any[]) {
+        this.data = data;
+    }
+
+    public render() {
         return (
                 <ul className="user-groups">
-                    {data.map((val: any) => this.renderGroup(val, val))}
+                    {this.data.map((val: any) => this.renderGroup(val, val))}
                 </ul>);
     }
 

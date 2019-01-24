@@ -4,6 +4,7 @@ import "./Tiles.scss";
 
 export default class TilesLayout implements ILayoutStrategy {
     private placeholders: JSX.Element[];
+    private data: any[] = [];
 
     constructor() {
         // todo: replace whith grid layout when IE supports it
@@ -13,11 +14,15 @@ export default class TilesLayout implements ILayoutStrategy {
         });
     }
 
-    public render(data: any[]) {
+    public setup(data: any[]) {
+        this.data = data;
+    }
+
+    public render() {
         
         return (
                 <ul className="user-tiles">
-                    {data.map((val: number) => this.renderTile(val, val)).concat(this.placeholders)}
+                    {this.data.map((val: number) => this.renderTile(val, val)).concat(this.placeholders)}
                 </ul>);
     }
 

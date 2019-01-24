@@ -51,9 +51,10 @@ class LayoutContainer extends Component<ILayoutTypeProps, ILayoutDataState> {
     }
 
     private renderLayout(layout: ILayoutStrategy): JSX.Element {
+        layout.setup(this.state.data.map(user => user.id));
         return (
             <div className="users-container__content-panel">
-                {layout.render(this.state.data.map(user => user.id))}
+                {layout.render()}
             </div>
         );
     }

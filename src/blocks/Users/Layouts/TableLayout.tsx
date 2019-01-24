@@ -3,11 +3,16 @@ import ILayoutStrategy from './ILayoutStrategy';
 import "./Table.scss";
 
 export default class TableLayout implements ILayoutStrategy {
+    private data: any[] = [];
 
-    public render(data: any[]) {
+    public setup(data: any[]) {
+        this.data = data;
+    }
+
+    public render() {
         return (
             <div className="users-table">
-                {data.map((val: any) => this.renderLine(val, val))}
+                {this.data.map((val: any) => this.renderLine(val, val))}
             </div>);
     }
 
