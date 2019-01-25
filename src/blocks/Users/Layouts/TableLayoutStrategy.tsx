@@ -2,7 +2,6 @@ import React from 'react';
 import UserModel from '../../../model/userModel';
 import ILayoutStrategy from './ILayoutStrategy';
 import "./Table.scss";
-import groups from '../../../model/groups';
 
 export default class TableLayoutStrategy implements ILayoutStrategy {
     private data: UserModel[] = [];
