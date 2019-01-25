@@ -2,6 +2,7 @@
   "name": "kl-task",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://rh77.github.io/kl-task",
   "dependencies": {
     "@types/jest": "23.3.13",
     "@types/node": "10.12.18",
@@ -11,6 +12,7 @@
     "babel-core": "^6.26.3",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
+    "gh-pages": "^2.0.1",
     "json-object-mapper": "^1.6.0",
     "node-sass": "^4.11.0",
     "react": "^16.7.0",
@@ -23,7 +25,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
