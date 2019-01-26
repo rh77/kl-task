@@ -1,7 +1,7 @@
 import React from 'react';
-import UserModel from '../../../model/userModel';
+import UserModel from '../../../../model/userModel';
+import ILayoutStrategy from '../ILayoutStrategy';
 import "./Groups.scss";
-import ILayoutStrategy from './ILayoutStrategy';
 
 type UserGroup = [string, UserModel[]];
 

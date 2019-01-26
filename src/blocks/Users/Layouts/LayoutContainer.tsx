@@ -3,10 +3,10 @@ import UserDataProvider from '../../../model/userDataProvider';
 import UserModel from '../../../model/userModel';
 import ViewType from "../Enums/ViewType";
 import ILayoutTypeProps from '../Props/ILayoutTypeProps';
-import GroupsLayoutStrategy from './GroupsLayoutStrategy';
+import GroupsLayoutStrategy from './Groups/GroupsLayoutStrategy';
 import ILayoutStrategy from './ILayoutStrategy';
-import TableLayoutStrategy from './TableLayoutStrategy';
-import TilesLayoutStrategy from './TilesLayoutStrategy';
+import TableLayoutStrategy from './Table/TableLayoutStrategy';
+import TilesLayoutStrategy from './Tiles/TilesLayoutStrategy';
 
 interface ILayoutDataState {
     data: UserModel[];

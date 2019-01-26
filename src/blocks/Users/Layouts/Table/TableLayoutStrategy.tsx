@@ -1,6 +1,6 @@
 import React from 'react';
-import UserModel from '../../../model/userModel';
-import ILayoutStrategy from './ILayoutStrategy';
+import UserModel from '../../../../model/userModel';
+import ILayoutStrategy from '../ILayoutStrategy';
 import "./Table.scss";
 
 export default class TableLayoutStrategy implements ILayoutStrategy {

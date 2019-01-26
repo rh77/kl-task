@@ -1,6 +1,7 @@
 import React from 'react';
-import UserModel from '../../../model/userModel';
-import ILayoutStrategy from './ILayoutStrategy';
+import UserModel from '../../../../model/userModel';
+import ILayoutStrategy from '../ILayoutStrategy';
+import Tile from './Tile';
 import "./Tiles.scss";
 
 export default class TilesLayoutStrategy implements ILayoutStrategy {
@@ -8,7 +9,7 @@ export default class TilesLayoutStrategy implements ILayoutStrategy {
     private data: UserModel[] = [];
 
     constructor() {
-        // todo: replace whith grid layout when IE supports it
+        // This is a trick for last tiles to correct growing. Remove when grid layout is supported
         const placeHolderKeys = new Array(10).fill(0); 
         this.placeholders = placeHolderKeys.map((_, i) => {
             return <li key={"placeholder" + i} className="user-tiles__placeholder"/>;
@@ -32,18 +33,3 @@ export default class TilesLayoutStrategy implements ILayoutStrategy {
         return <Tile key={key} valueObject={value}/>;
     }
 }
-  
-const Tile = (props: { valueObject: UserModel }): JSX.Element => {
-
-    const {name, picture, group, groupId, phone} = props.valueObject;
-    const groupClassName = "user-tile__group" + (groupId === 0 ? " user-tile__group_unmanaged" : "");
-    return (
-        <li className="user-tiles__tile user-tile">
-            <input className="user-tile__check" type="checkbox"/>
-            <button className="user-tile__upload-button"/>
-            <label className="user-tile__name">{name}</label>
-            <img className="user-tile__picture" src={picture}/>
-            <label className={groupClassName}>{group}</label>
-            <label className="user-tile__phone">{phone}</label>
-        </li>);
-};
