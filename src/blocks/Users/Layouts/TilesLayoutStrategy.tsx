@@ -34,5 +34,16 @@ export default class TilesLayoutStrategy implements ILayoutStrategy {
 }
   
 const Tile = (props: { valueObject: UserModel }): JSX.Element => {
-    return <li className="user-tiles__tile">{props.valueObject.name}</li>;
+
+    const {name, picture, group, groupId, phone} = props.valueObject;
+    const groupClassName = "user-tile__group" + (groupId === 0 ? " user-tile__group_unmanaged" : "");
+    return (
+        <li className="user-tiles__tile user-tile">
+            <input className="user-tile__check" type="checkbox"/>
+            <button className="user-tile__upload-button"/>
+            <label className="user-tile__name">{name}</label>
+            <img className="user-tile__picture" src={picture}/>
+            <label className={groupClassName}>{group}</label>
+            <label className="user-tile__phone">{phone}</label>
+        </li>);
 };

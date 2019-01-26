@@ -24,16 +24,15 @@ export default class TableLayoutStrategy implements ILayoutStrategy {
 
 const Line = (props: { valueObject: UserModel, isUnmanaged: boolean}): JSX.Element => {
 
-    const classes = 
-          "users-table__row " 
-           + (props.isUnmanaged ? "users-table__row_unmanaged" : "");
+    const {name, company, email, group, groupId, phone} = props.valueObject;
+    const classes = "users-table__row" + (groupId === 0 ? " users-table__row_unmanaged" : "");
     const line = (
             <div className={classes}>
-                <div className="users-table__cell">{props.valueObject.name}</div>
-                <div className="users-table__cell">{props.valueObject.company}</div>
-                <div className="users-table__cell">{props.valueObject.email}</div>
-                <div className="users-table__cell">{props.valueObject.group}</div>
-                <div className="users-table__cell">{props.valueObject.phone}</div>
+                <div className="users-table__cell">{name}</div>
+                <div className="users-table__cell">{company}</div>
+                <div className="users-table__cell">{email}</div>
+                <div className="users-table__cell">{group}</div>
+                <div className="users-table__cell">{phone}</div>
             </div>);
 
     return line;

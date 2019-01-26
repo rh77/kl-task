@@ -23,6 +23,9 @@ export default class UserModel {
     @JsonProperty({ type: String, name: "name" })
     public name: string;
 
+    @JsonProperty({ type: String, name: "picture" })
+    public picture: string;
+
     @JsonProperty({ type: String, name: "company" })
     public company: string;
 
@@ -37,6 +40,7 @@ export default class UserModel {
         this.group = "";
         this.groupId = 0;
         this.name = "";
+        this.picture = "";
         this.company = "";
         this.email = "";
         this.phone = "";

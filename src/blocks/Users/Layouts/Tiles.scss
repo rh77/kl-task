@@ -15,11 +15,11 @@ $tile-height: 300px;
     margin-block-start: 0;
 
     &__tile {
+        position: relative;
         display: flex;
         flex-basis: $tile-width;
         flex-grow: 1;
         flex-direction: column;
-        background-color: bisque;
         width: $tile-width;
         height: $tile-height;
         margin: 1em;
@@ -34,5 +34,71 @@ $tile-height: 300px;
         height: 0;
         margin-left: 1em;
         margin-right: 1em;
+    }
+}
+
+.user-tile {
+    background-color: rgb(243, 243, 243);
+    text-align: center; 
+    overflow: hidden;
+    white-space: nowrap;
+
+    & > * {
+        padding: 0;
+        text-overflow: ellipsis;
+    }
+
+    &__name {
+        padding-top: 45px;
+        font-weight: bold;
+        margin-top: 9px;
+        margin-bottom: 9px;
+    }
+
+    &__picture {
+        width: 100px;
+        height: 100px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 13px;
+        margin-bottom: 13px;
+    }
+
+    &__phone {       
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    &__group {      
+        margin-top: 5px;
+        margin-bottom: 5px;
+        max-width: 100%;
+        max-height: 20px
+
+        &_unmanaged {
+            font-weight: bold;
+        }
+    }
+
+    &__check {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+    }
+
+    &__upload-button {
+        width: 28px;
+        height: 28px;
+        outline: none;
+        border: none;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-image: url("./img/cloud-upload.svg"); 
+        background-color: transparent;
+        display: inline-block;
+        cursor: pointer;
+        position: absolute;
+        top: 10px;
+        right: 15px;
     }
 }
