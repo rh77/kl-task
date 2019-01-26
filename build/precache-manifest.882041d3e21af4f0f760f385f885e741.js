@@ -12,23 +12,27 @@ self.__precacheManifest = [
     "url": "/kl-task/static/media/group-view.f49be5eb.svg"
   },
   {
+    "revision": "da552689c0a15f7edb7779cda27188f1",
+    "url": "/kl-task/static/media/cloud-upload.da552689.svg"
+  },
+  {
     "revision": "9dc895c06c55663ebf5a",
     "url": "/kl-task/static/js/runtime~main.9dc895c0.js"
   },
   {
-    "revision": "af0818c5ec3ca1c70f31",
-    "url": "/kl-task/static/js/main.af0818c5.chunk.js"
+    "revision": "fa4e0d09d6f0f86a7e29",
+    "url": "/kl-task/static/js/main.fa4e0d09.chunk.js"
   },
   {
-    "revision": "51a42b58ccf7cec8c88d",
-    "url": "/kl-task/static/js/1.51a42b58.chunk.js"
+    "revision": "6345ffcc00399e61a6c4",
+    "url": "/kl-task/static/js/1.6345ffcc.chunk.js"
   },
   {
-    "revision": "af0818c5ec3ca1c70f31",
-    "url": "/kl-task/static/css/main.cc0e9975.chunk.css"
+    "revision": "fa4e0d09d6f0f86a7e29",
+    "url": "/kl-task/static/css/main.d6f7f720.chunk.css"
   },
   {
-    "revision": "0966a65daac4310bca3e19b8c50c4cfe",
+    "revision": "2712122b4458ad83b63b6e0f4f35f0b5",
     "url": "/kl-task/index.html"
   }
 ];
