@@ -3,10 +3,10 @@ import UserModel from '../../../../model/userModel';
 import placeHolderImage from "./img/avatar-placeholder.png";
 import "./Tiles.scss";
 
-export default class Tile extends Component<{ valueObject: UserModel }, { loaded: boolean }> {
+export default class Tile extends Component<{ userModel: UserModel }, { loaded: boolean }> {
     private image: HTMLImageElement;
 
-    constructor(props: { valueObject: UserModel }) {
+    constructor(props: { userModel: UserModel }) {
         super(props);
 
         this.state = {
@@ -17,11 +17,11 @@ export default class Tile extends Component<{ valueObject: UserModel }, { loaded
         this.image.onload = () => {
             this.setState({ loaded: true });
         };
-        this.image.src = this.props.valueObject.picture;
+        this.image.src = this.props.userModel.picture;
     }
 
     public render() {
-        const {name, picture, group, groupId, phone} = this.props.valueObject;
+        const {name, picture, group, groupId, phone} = this.props.userModel;
         const pictureSrc = this.state.loaded ? picture : placeHolderImage;
         const groupClassName = "user-tile__group" + (groupId === 0 ? " user-tile__group_unmanaged" : "");
         return (

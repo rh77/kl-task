@@ -50,6 +50,7 @@ $tile-height: 250px;
     background-color: rgb(243, 243, 243);
     text-align: center; 
     font-size: 14px;
+    padding: 5px;
 
     & > * {
         padding: 0;
@@ -71,16 +72,6 @@ $tile-height: 250px;
         margin-top: 12px;
         margin-bottom: 12px;
         overflow: hidden;
-
-        &:before { 
-            content: " ";
-            box-sizing: border-box;
-            display: block;
-            width: 90px;
-            height: 90px;
-            background-color: rgb(230, 230, 230);
-            border: 1px solid rgb(200, 200, 200);
-        }
     }
 
     &__phone {       
@@ -92,6 +83,7 @@ $tile-height: 250px;
     &__group {      
         margin-top: 3px;
         margin-bottom: 3px;
+        font-size: 12px;
         @include tile-label;
 
         &_unmanaged {

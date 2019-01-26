@@ -1,27 +1,83 @@
 @import "../../../variables.scss";
 
-$group-width: 200px;
-$group-height: 300px;
+$group-width: 250px;
+$hyperlink-color: skyblue;
+$soft-text-color: rgb(68, 68, 68);
 
 .user-groups {
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
     list-style: none;
-    column-gap: 2em;
-    columns: 5;
-    column-fill: balance;
-    margin: 0;
-    padding: $big-blocks-offset;
-    margin-bottom: $big-blocks-offset;
+    padding-inline-start: 0;
+    padding-inline-end: 0;
+    padding-left: $big-blocks-offset;
+    padding-right: $big-blocks-offset;    
+    margin-block-start: 0;
 
     &__group {
+        position: relative;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         width: $group-width;
-        height: $group-height;
-        background-color: aliceblue;
-        margin-bottom: 2em;
-
-        &:last-of-type {
-            margin-bottom: 0;
-        }
+        height: auto;
+        border: 1px solid gainsboro;
+        margin: 1em;
+        padding: 5px;
     }
+}
+
+@mixin header-label-padding {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 18px;
+    padding-right: 18px;
+}
+
+.group-header {
+    text-align: left;
+    font-size: 16px;
+    font-weight: bold;
+    color: $soft-text-color;
+    @include header-label-padding;
+}
+
+.user-plates-list {
+    list-style: none;
+    padding-inline-start: 0;
+    padding-inline-end: 0;
+}
+
+.user-plate {
+    border: 1px solid lightgray;
+    margin: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 18px;
+    padding-right: 18px;
+    color: $soft-text-color;
+
+    &__name {
+        display: block;
+        text-align: left;
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    &__email {
+        display: block;
+        font-size: 12px;
+        text-align: left;
+        color: $soft-text-color;
+    }
+}
+
+.group-footer-label {
+    display: block;
+    text-align: left;
+    font-size: 14px;
+    font-weight: bold;
+    color: $hyperlink-color;
+    @include header-label-padding;
+    cursor: pointer;
 }

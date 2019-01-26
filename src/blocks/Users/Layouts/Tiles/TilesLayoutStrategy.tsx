@@ -9,7 +9,7 @@ export default class TilesLayoutStrategy implements ILayoutStrategy {
     private data: UserModel[] = [];
 
     constructor() {
-        // This is a trick for last tiles to correct growing. Remove when grid layout is supported
+        // This is a trick for last tiles to grow like the others. Remove when grid layout is supported
         const placeHolderKeys = new Array(10).fill(0); 
         this.placeholders = placeHolderKeys.map((_, i) => {
             return <li key={"placeholder" + i} className="user-tiles__placeholder"/>;
@@ -23,13 +23,13 @@ export default class TilesLayoutStrategy implements ILayoutStrategy {
     public render() {
         
         const data = this.data
-            .map((val: UserModel) => this.renderTile(val.id, val))
+            .map((val: UserModel) => this.renderTile(val))
             .concat(this.placeholders);
 
         return <ul className="user-tiles">{data}</ul>;
     }
 
-    private renderTile(key: string, value: UserModel): JSX.Element {
-        return <Tile key={key} valueObject={value}/>;
+    private renderTile(userModel: UserModel): JSX.Element {
+        return <Tile key={userModel.id} userModel={userModel}/>;
     }
 }

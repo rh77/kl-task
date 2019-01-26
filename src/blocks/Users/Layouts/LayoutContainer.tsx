@@ -3,6 +3,7 @@ import UserDataProvider from '../../../model/userDataProvider';
 import UserModel from '../../../model/userModel';
 import ViewType from "../Enums/ViewType";
 import ILayoutTypeProps from '../Props/ILayoutTypeProps';
+import "../Users.scss";
 import GroupsLayoutStrategy from './Groups/GroupsLayoutStrategy';
 import ILayoutStrategy from './ILayoutStrategy';
 import TableLayoutStrategy from './Table/TableLayoutStrategy';

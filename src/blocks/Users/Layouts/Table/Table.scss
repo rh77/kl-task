@@ -28,6 +28,11 @@ $unmanaged-even-color: rgb(223, 232, 240);
     }
 
     &__cell {
-        display: table-cell;       
+        display: table-cell;    
+        padding-top: 8px;
+        padding-bottom: 8px;
+        padding-left: 13px;   
+        padding-right: 13px;  
+        overflow: hidden; 
     }
 }

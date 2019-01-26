@@ -30,15 +30,35 @@ export default class GroupsLayoutStrategy implements ILayoutStrategy {
     public render() {
         return (
                 <ul className="user-groups">
-                    {this.groups.map((val: UserGroup) => this.renderGroup(val[0], val))}
+                    {this.groups.map((val: UserGroup) => this.renderGroup(val))}
                 </ul>);
     }
 
-    private renderGroup(key: string, value: UserGroup): JSX.Element {
-        return <Group key={key} valueObject={value}/>;
+    private renderGroup(userGroup: UserGroup): JSX.Element {
+        const groupName = userGroup[0];
+        return <Group key={groupName} userGroup={userGroup}/>;
     }
 }
   
-const Group = (props: { valueObject: UserGroup }): JSX.Element => {
-    return <li className="user-groups__group">{props.valueObject[0]}</li>;
+const Group = (props: { userGroup: UserGroup }): JSX.Element => {
+    const groupName = props.userGroup[0];
+    const groupUsers = props.userGroup[1];
+    return (
+        <li className="user-groups__group">
+            <div className="group-header">{groupName}</div>
+            <ul className="user-plates-list">
+                {groupUsers.map((user: UserModel) => <UserPlate key={user.id} userModel={user}/>)}
+            </ul>
+            <label className="group-footer-label">Add user...</label>
+        </li>
+    );
 };
+
+const UserPlate = (props: { userModel: UserModel }): JSX.Element => {
+    return (
+        <li className="user-plate">
+            <label className="user-plate__name">{props.userModel.name}</label>
+            <label className="user-plate__email">{props.userModel.email}</label>
+        </li>
+    );
+}
