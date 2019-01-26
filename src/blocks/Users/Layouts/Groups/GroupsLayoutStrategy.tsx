@@ -61,4 +61,4 @@ const UserPlate = (props: { userModel: UserModel }): JSX.Element => {
             <label className="user-plate__email">{props.userModel.email}</label>
         </li>
     );
-}
+};
