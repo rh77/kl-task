@@ -15,9 +15,11 @@ interface ILayoutContainerState {
 
 class LayoutContainer extends Component<ILayoutProps, ILayoutContainerState> {
 
-    private tableLayout: ILayoutStrategy;
-    private groupsLayout: ILayoutStrategy;
-    private tilesLayout: ILayoutStrategy;
+    private layouts: object = {
+        [ViewType.Group]: new GroupsLayoutStrategy(),
+        [ViewType.Table]: new TableLayoutStrategy(),
+        [ViewType.Tile]: new TilesLayoutStrategy() 
+    };
 
     constructor(props: ILayoutProps) {
         super(props);
@@ -31,25 +33,12 @@ class LayoutContainer extends Component<ILayoutProps, ILayoutContainerState> {
                 data: UserDataProvider.instance.userData
             });
         };
-
-        this.tableLayout = new TableLayoutStrategy();
-        this.groupsLayout = new GroupsLayoutStrategy();
-        this.tilesLayout = new TilesLayoutStrategy();
     }
     
     public render() {
   
-        switch (this.props.viewType) {   
-            case ViewType.Table:
-                return this.renderLayout(this.tableLayout);
-        
-            case ViewType.Group:
-                return this.renderLayout(this.groupsLayout);
-        
-            case ViewType.Tile:
-            default:
-                return this.renderLayout(this.tilesLayout);
-        }
+        const layout = this.layouts[this.props.viewType] || new TilesLayoutStrategy();
+        return this.renderLayout(layout);
     }
 
     private renderLayout(layout: ILayoutStrategy): JSX.Element {

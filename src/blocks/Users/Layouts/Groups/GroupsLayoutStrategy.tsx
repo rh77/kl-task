@@ -61,11 +61,13 @@ const Group = (props: { header: string, users: UserModel[] }): JSX.Element => {
     const { header, users } = props;
     return (
         <li className="user-groups__group">
-            <div className="group-header">{header}</div>
-            <ul className="user-plates-list">
-                {users.map((user: UserModel) => <UserPlate key={user.id} userModel={user}/>)}
-            </ul>
-            <label className="group-footer-label">Add user...</label>
+            <div className="user-group-wrapper">
+                <div className="group-header">{header}</div>
+                <ul className="user-plates-list">
+                    {users.map((user: UserModel) => <UserPlate key={user.id} userModel={user}/>)}
+                </ul>
+                <label className="group-footer-label">Add user...</label>
+            </div>
         </li>
     );
 };

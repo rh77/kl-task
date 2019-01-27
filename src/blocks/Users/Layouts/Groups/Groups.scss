@@ -21,10 +21,13 @@ $soft-text-color: rgb(68, 68, 68);
         flex-direction: column;
         width: $group-width;
         height: auto;
-        border: 1px solid gainsboro;
         margin: 1em;
         padding: 5px;
     }
+}
+
+.user-group-wrapper {
+    border: 1px solid gainsboro;
 }
 
 @mixin header-label-padding {

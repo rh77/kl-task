@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
+import "./Welcome.scss";
 
-interface IWelcomeProps {}
-
-class Welcome extends Component<IWelcomeProps> {
+class Welcome extends Component {
   public render(): JSX.Element {
     return (
-      <div>Welcome</div>
+      <div className="welcome-container">Welcome</div>
     );
   }
 }
