@@ -97,6 +97,14 @@ $tile-height: 250px;
         left: 10px;
     }
 
+    &__check-plate {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 45px;
+        height: 45px;
+    }
+
     &__upload-button {
         width: 28px;
         height: 28px;
