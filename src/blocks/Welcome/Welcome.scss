@@ -1,6 +1,173 @@
 .welcome-container {
-    display: block;
-    width: 100%;
-    height: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
     margin: auto;
+    padding: 10vmin;
 }
+
+.welcome-text {
+    font-size: 18px;
+    display: block;
+    width: 20%;
+    padding: 10px;
+}
+
+.clock {
+    display: none;
+    border: 2px dotted lightgray;
+    width: 25vmin;
+    height: 25vmin; 
+    border-radius: 100%;
+    position: relative;
+
+    @mixin arrow {
+        -webkit-transform-origin: 50% 100%; 
+        -ms-transform-origin: 50% 100%; 
+        transform-origin: 50% 100%;
+        border-radius: 20px;
+        position: absolute;
+        left: 47.5%;
+    }
+      
+    &__arrow-hour {
+        @include arrow;
+        background: gray;
+        height: 21%;
+        top: 29%;
+        width: 5%;
+    }
+      
+    &__arrow-minute {
+        @include arrow;
+        background: gray;
+        height: 35%;
+        top: 15%;
+        width: 5%;
+    }
+      
+    &__arrow-second {
+        @include arrow;
+        background: transparent;
+        height: 35%;
+        top: 14.9%;
+        left: 49.4%;
+        width: 1%;
+        background-image: radial-gradient(circle, gray, transparent);
+        background-repeat: repeat-y;
+        background-size: 100% 7%;
+    }
+      
+    &__center-cap{
+        background: gray;
+        position: absolute;
+        top: 46%;
+        left: 46%;
+        border-radius: 100%;
+        width: 8%;
+        height: 8%;
+    }
+
+    @mixin mark {
+        background: lightgray;
+        position: absolute;
+        border-radius: 100%;
+    }
+      
+    @mixin quarter-mark {
+        width: 5%;
+        height: 5%;
+    }
+      
+    &__hour12 {
+        @include mark;
+        @include quarter-mark;
+        top: 2%;
+        left: 47.5%;
+    }
+      
+    &__hour3 {
+        @include mark;
+        @include quarter-mark;
+        top: 47.5%;
+        right: 2%;
+    }
+      
+    &__hour6 {
+        @include mark;
+        @include quarter-mark;
+        bottom: 2%;
+        left: 47.5%;
+    }
+      
+    &__hour9 {
+        @include mark;
+        @include quarter-mark;
+        top: 47.5%;
+        left: 2%;
+    }
+      
+    @mixin hour-mark {
+        width: 3%;
+        height: 3%;
+    }
+      
+    &__hour1 {
+        @include mark;
+        @include hour-mark;
+        top: 9.5%;
+        right: 26%
+    }
+      
+    &__hour2 {
+        @include mark;
+        @include hour-mark;
+        top: 26%;
+        right: 9.5%
+    }
+      
+    &__hour5 {
+        @include mark;
+        @include hour-mark;
+        bottom: 9.5%;
+        right: 26%
+    }
+      
+    &__hour4 {
+        @include mark;
+        @include hour-mark;
+        bottom: 26%;
+        right: 9.5%
+    }
+      
+    &__hour11 {
+        @include mark;
+        @include hour-mark;
+        top: 9.5%;
+        left: 26%
+    }
+      
+    &__hour10 {
+        @include mark;
+        @include hour-mark;
+        top: 26%;
+        left: 9.5%
+    }
+      
+    &__hour7 {
+        @include mark;
+        @include hour-mark;
+        bottom: 9.5%;
+        left: 26%
+    }
+      
+    &__hour8 {
+        @include mark;
+        @include hour-mark;
+        bottom: 26%;
+        left: 9.5%
+    }
+}
+
+
