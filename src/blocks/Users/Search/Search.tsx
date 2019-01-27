@@ -31,7 +31,7 @@ export default class Search extends Component<ISearchProps> {
   }
 
   private onSearch(e: React.FormEvent<HTMLInputElement>): void {
-    const text = (e.target as HTMLInputElement).value;
+    const text = (e.target as HTMLInputElement).value || "";
     this.throttledSearch(text);
   }
 
