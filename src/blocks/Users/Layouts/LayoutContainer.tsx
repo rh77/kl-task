@@ -2,24 +2,24 @@ import React, { Component } from 'react';
 import UserDataProvider from '../../../model/userDataProvider';
 import UserModel from '../../../model/userModel';
 import ViewType from "../Enums/ViewType";
-import ILayoutTypeProps from '../Props/ILayoutTypeProps';
+import ILayoutProps from '../Props/ILayoutProps';
 import "../Users.scss";
 import GroupsLayoutStrategy from './Groups/GroupsLayoutStrategy';
 import ILayoutStrategy from './ILayoutStrategy';
 import TableLayoutStrategy from './Table/TableLayoutStrategy';
 import TilesLayoutStrategy from './Tiles/TilesLayoutStrategy';
 
-interface ILayoutDataState {
+interface ILayoutContainerState {
     data: UserModel[];
 }
 
-class LayoutContainer extends Component<ILayoutTypeProps, ILayoutDataState> {
+class LayoutContainer extends Component<ILayoutProps, ILayoutContainerState> {
 
     private tableLayout: ILayoutStrategy;
     private groupsLayout: ILayoutStrategy;
     private tilesLayout: ILayoutStrategy;
 
-    constructor(props: ILayoutTypeProps) {
+    constructor(props: ILayoutProps) {
         super(props);
 
         this.state = {
@@ -53,7 +53,7 @@ class LayoutContainer extends Component<ILayoutTypeProps, ILayoutDataState> {
     }
 
     private renderLayout(layout: ILayoutStrategy): JSX.Element {
-        layout.setup(this.state.data);
+        layout.setup(this.state.data, this.props.searchString);
         return (
             <div className="users-container__content-panel">
                 {layout.render()}

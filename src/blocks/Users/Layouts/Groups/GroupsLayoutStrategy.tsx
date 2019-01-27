@@ -1,6 +1,8 @@
 import React from 'react';
 import UserModel from '../../../../model/userModel';
+import CaseInsensitiveSearchStrategy from '../CaseInsensitiveSearchStrategy';
 import ILayoutStrategy from '../ILayoutStrategy';
+import ISearchStrategy from '../ISearchStrategy';
 import "./Groups.scss";
 
 type UserGroup = [string, UserModel[]];
@@ -8,23 +10,37 @@ type UserGroup = [string, UserModel[]];
 export default class GroupsLayoutStrategy implements ILayoutStrategy {
     
     private groups: UserGroup[] = [];
+    private searchStrategy: ISearchStrategy = new CaseInsensitiveSearchStrategy();
 
-    public setup(data: UserModel[]) {
+    public setup(data: UserModel[], searchString?: string) {
 
+        const groups: UserGroup[] = [];
         for (const userModel of data) {
 
-            const userGroups = this.groups.filter((group: UserGroup) => group[0] === userModel.group);
+            if (searchString && !this.searchStrategy.tryFind(userModel.name, searchString)) {
+                continue;
+            }
+
+            let targetGroup: UserGroup | null = null;
+            for (const group of groups) {
+                if (group[0] === userModel.group) {
+                    targetGroup = group;
+                    break;
+                }
+            }
 
             let userGroup: UserGroup;
-            if (userGroups.length === 0) {
+            if (!targetGroup) {
                 userGroup = [userModel.group, []];
-                this.groups.push(userGroup);
+                groups.push(userGroup);
             } else {
-                userGroup = userGroups[0];
+                userGroup = targetGroup;
             }
 
             userGroup[1].push(userModel);
         }
+
+        this.groups = groups;
     }
 
     public render() {
@@ -36,18 +52,18 @@ export default class GroupsLayoutStrategy implements ILayoutStrategy {
 
     private renderGroup(userGroup: UserGroup): JSX.Element {
         const groupName = userGroup[0];
-        return <Group key={groupName} userGroup={userGroup}/>;
+        const groupUsers = userGroup[1];
+        return <Group key={groupName} header={groupName} users={groupUsers}/>;
     }
 }
   
-const Group = (props: { userGroup: UserGroup }): JSX.Element => {
-    const groupName = props.userGroup[0];
-    const groupUsers = props.userGroup[1];
+const Group = (props: { header: string, users: UserModel[] }): JSX.Element => {
+    const { header, users } = props;
     return (
         <li className="user-groups__group">
-            <div className="group-header">{groupName}</div>
+            <div className="group-header">{header}</div>
             <ul className="user-plates-list">
-                {groupUsers.map((user: UserModel) => <UserPlate key={user.id} userModel={user}/>)}
+                {users.map((user: UserModel) => <UserPlate key={user.id} userModel={user}/>)}
             </ul>
             <label className="group-footer-label">Add user...</label>
         </li>

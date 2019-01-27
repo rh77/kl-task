@@ -5,5 +5,5 @@ export default interface ILayoutStrategy {
 
     render(): JSX.Element;
 
-    setup(data: UserModel[]): void;
+    setup(data: UserModel[], searchString?: string): void;
 }
