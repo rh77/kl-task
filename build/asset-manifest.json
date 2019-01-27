@@ -1,15 +1,15 @@
 {
-  "main.css": "/kl-task/static/css/main.c37a99ef.chunk.css",
-  "main.js": "/kl-task/static/js/main.567d2646.chunk.js",
-  "main.js.map": "/kl-task/static/js/main.567d2646.chunk.js.map",
-  "static/js/1.91c4f0aa.chunk.js": "/kl-task/static/js/1.91c4f0aa.chunk.js",
-  "static/js/1.91c4f0aa.chunk.js.map": "/kl-task/static/js/1.91c4f0aa.chunk.js.map",
+  "main.css": "/kl-task/static/css/main.e00a5275.chunk.css",
+  "main.js": "/kl-task/static/js/main.438160ab.chunk.js",
+  "main.js.map": "/kl-task/static/js/main.438160ab.chunk.js.map",
+  "static/js/1.eed83da0.chunk.js": "/kl-task/static/js/1.eed83da0.chunk.js",
+  "static/js/1.eed83da0.chunk.js.map": "/kl-task/static/js/1.eed83da0.chunk.js.map",
   "runtime~main.js": "/kl-task/static/js/runtime~main.9dc895c0.js",
   "runtime~main.js.map": "/kl-task/static/js/runtime~main.9dc895c0.js.map",
   "static/media/Tiles.scss": "/kl-task/static/media/cloud-upload.da552689.svg",
-  "static/media/LayoutSwitcher.scss": "/kl-task/static/media/group-view.f49be5eb.svg",
-  "static/css/main.c37a99ef.chunk.css.map": "/kl-task/static/css/main.c37a99ef.chunk.css.map",
+  "static/media/LayoutSwitcher.scss": "/kl-task/static/media/tile-view.c0e4a0b3.svg",
+  "static/css/main.e00a5275.chunk.css.map": "/kl-task/static/css/main.e00a5275.chunk.css.map",
   "index.html": "/kl-task/index.html",
-  "precache-manifest.80af09a76024117f25fbd2689cbe2185.js": "/kl-task/precache-manifest.80af09a76024117f25fbd2689cbe2185.js",
+  "precache-manifest.135289bcf5d0ac69d9be75770b054c38.js": "/kl-task/precache-manifest.135289bcf5d0ac69d9be75770b054c38.js",
   "service-worker.js": "/kl-task/service-worker.js"
 }

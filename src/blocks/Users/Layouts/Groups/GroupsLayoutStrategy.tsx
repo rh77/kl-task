@@ -3,6 +3,7 @@ import UserModel from '../../../../model/userModel';
 import CaseInsensitiveSearchStrategy from '../CaseInsensitiveSearchStrategy';
 import ILayoutStrategy from '../ILayoutStrategy';
 import ISearchStrategy from '../ISearchStrategy';
+import Group from './Group';
 import "./Groups.scss";
 
 type UserGroup = [string, UserModel[]];
@@ -56,27 +57,3 @@ export default class GroupsLayoutStrategy implements ILayoutStrategy {
         return <Group key={groupName} header={groupName} users={groupUsers}/>;
     }
 }
-  
-const Group = (props: { header: string, users: UserModel[] }): JSX.Element => {
-    const { header, users } = props;
-    return (
-        <li className="user-groups__group">
-            <div className="user-group-wrapper">
-                <div className="group-header">{header}</div>
-                <ul className="user-plates-list">
-                    {users.map((user: UserModel) => <UserPlate key={user.id} userModel={user}/>)}
-                </ul>
-                <label className="group-footer-label">Add user...</label>
-            </div>
-        </li>
-    );
-};
-
-const UserPlate = (props: { userModel: UserModel }): JSX.Element => {
-    return (
-        <li className="user-plate">
-            <label className="user-plate__name">{props.userModel.name}</label>
-            <label className="user-plate__email">{props.userModel.email}</label>
-        </li>
-    );
-};
