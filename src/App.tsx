@@ -7,6 +7,7 @@ import Router from './blocks/Routing/Router';
 import Users from './blocks/Users/Users';
 import Welcome from './blocks/Welcome/Welcome';
 import UserDataProvider from './model/userDataProvider';
+import "./model/users.json";
 
 class App extends Component {
   constructor(props) {
