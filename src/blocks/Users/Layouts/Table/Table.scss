@@ -10,6 +10,11 @@ $unmanaged-even-color: rgb(223, 232, 240);
     display: table;
     width: 100%;
 
+    &__header {
+        display: table-row;
+        background-color: $odd-color;
+    }
+
     &__row {
         display: table-row;
         background-color: $odd-color;
@@ -34,5 +39,18 @@ $unmanaged-even-color: rgb(223, 232, 240);
         padding-left: 13px;   
         padding-right: 13px;  
         overflow: hidden; 
+
+        &_heading {
+            border-bottom: 2px solid black;
+            cursor: pointer;
+        }
+
+        &_sorted_asc::after {
+            content: " ▴";
+        }
+    
+        &_sorted_desc::after {
+            content: " ▾";
+        }
     }
 }

@@ -45,12 +45,12 @@ $soft-text-color: rgb(68, 68, 68);
     cursor: pointer;
     @include header-label-padding;
 
-    &_sorted_asc::before {
-        content: "▲ ";
+    &_sorted_asc::after {
+        content: " ▴";
     }
 
-    &_sorted_desc::before {
-        content: "▼ ";
+    &_sorted_desc::after {
+        content: " ▾";
     }
 }
 
