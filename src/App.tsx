@@ -7,13 +7,12 @@ import Router from './blocks/Routing/Router';
 import Users from './blocks/Users/Users';
 import Welcome from './blocks/Welcome/Welcome';
 import UserDataProvider from './model/userDataProvider';
-import "./model/users.json";
 
 class App extends Component {
   constructor(props) {
     super(props);
 
-    UserDataProvider.instance.requestUsersData("https://api.myjson.com/bins/z1hb8");
+    UserDataProvider.instance.requestUsersData("https://api.myjson.com/bins/sz7d4");
     //UserDataProvider.instance.requestUsersData("http://www.json-generator.com/api/json/get/ceVZNLiQUi?indent=2");
   }
 

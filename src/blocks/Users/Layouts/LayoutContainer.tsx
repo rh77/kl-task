@@ -15,11 +15,7 @@ interface ILayoutContainerState {
 
 class LayoutContainer extends Component<ILayoutProps, ILayoutContainerState> {
 
-    private layouts: object = {
-        [ViewType.Group]: new GroupsLayoutStrategy(),
-        [ViewType.Table]: new TableLayoutStrategy(),
-        [ViewType.Tile]: new TilesLayoutStrategy() 
-    };
+    private layouts: object;
 
     constructor(props: ILayoutProps) {
         super(props);
@@ -32,6 +28,12 @@ class LayoutContainer extends Component<ILayoutProps, ILayoutContainerState> {
             this.setState({
                 data: UserDataProvider.instance.userData
             });
+        };
+
+        this.layouts = {
+            [ViewType.Group]: new GroupsLayoutStrategy(),
+            [ViewType.Table]: new TableLayoutStrategy(),
+            [ViewType.Tile]: new TilesLayoutStrategy() 
         };
     }
     
