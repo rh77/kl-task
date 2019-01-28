@@ -12,7 +12,7 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    UserDataProvider.instance.requestUsersData("https://api.myjson.com/bins/z1hb8");
+    UserDataProvider.instance.requestUsersData("http://www.json-generator.com/api/json/get/ceVZNLiQUi?indent=2");
   }
 
   public render(): JSX.Element {
