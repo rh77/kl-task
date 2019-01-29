@@ -37,15 +37,13 @@ class Users extends Component<ILayoutProps, ILayoutState> {
 
   private handleSwitch(clickedType: ViewType): void {
     this.setState({
-      searchString: this.state.searchString,
       viewType: clickedType
     });
   }
 
   private handleSearch(text: string): void {
     this.setState({
-      searchString: text,
-      viewType: this.state.viewType
+      searchString: text
     });
   }
 }
