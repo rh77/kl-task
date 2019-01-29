@@ -12,6 +12,6 @@ export default class CaseInsensitiveSearchStrategy implements ISearchStrategy {
             return true;
         }
 
-        return source.toLowerCase().indexOf(this.target) > 0;
+        return source.toLowerCase().indexOf(this.target) >= 0;
     }
 }
