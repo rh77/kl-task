@@ -16,7 +16,8 @@ export default class TableLayoutStrategy implements ILayoutStrategy {
             return;
         }
 
-        this.users = users.filter((user) => this.searchStrategy.tryFind(user.name, searchString));      
+        this.searchStrategy.setup(searchString);
+        this.users = users.filter((user) => this.searchStrategy.tryFind(user.name));      
     }
 
     public render() {

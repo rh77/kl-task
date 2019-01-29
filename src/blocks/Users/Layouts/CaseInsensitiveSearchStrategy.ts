@@ -1,8 +1,17 @@
 import ISearchStrategy from "./ISearchStrategy";
 
 export default class CaseInsensitiveSearchStrategy implements ISearchStrategy {
-    
-    public tryFind(source: string, target: string): boolean {
-        return source.toLowerCase().indexOf(target.toLowerCase()) > 0;
+    private target?: string;
+
+    public setup(targetText?: string): void {
+        this.target = targetText && targetText.toLowerCase();
+    }
+
+    public tryFind(source: string): boolean {
+        if (!this.target) {
+            return true;
+        }
+
+        return source.toLowerCase().indexOf(this.target) > 0;
     }
 }

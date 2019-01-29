@@ -25,14 +25,13 @@ export default class TilesLayoutStrategy implements ILayoutStrategy {
             return;
         }
 
-        this.users = users.filter((user) => this.searchStrategy.tryFind(user.name, searchString));  
+        this.searchStrategy.setup(searchString);
+        this.users = users.filter((user) => this.searchStrategy.tryFind(user.name));  
     }
 
     public render() {
         
-        const data = this.users
-            .map((val: UserModel) => this.renderTile(val))
-            .concat(this.placeholders);
+        const data = this.users.map(this.renderTile).concat(this.placeholders);
 
         return <ul className="user-tiles">{data}</ul>;
     }

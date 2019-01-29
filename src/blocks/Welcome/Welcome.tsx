@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import "./Welcome.scss";
 
 class Welcome extends Component<any, { time: Date }> {
-  private timeout:any = null;
+  private interval:any = null;
 
   constructor(props) {
     super(props);
@@ -51,11 +51,15 @@ class Welcome extends Component<any, { time: Date }> {
   }
 
   public componentDidMount() {
-    this.timeout = setInterval(() => {
+    this.interval = setInterval(() => {
       this.setState({ 
         time: new Date() 
       });
     }, 1000);
+  }
+
+  public componentWillUnmount() {
+    clearInterval(this.interval);
   }
 }
 

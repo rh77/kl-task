@@ -47,8 +47,7 @@ export default class Tile extends Component<{ userModel: UserModel }, { loaded: 
 
     private onCheckedChanged(e: React.FormEvent<HTMLDivElement>): boolean {
         this.setState({
-            checked: !this.state.checked,
-            loaded: this.state.loaded
+            checked: !this.state.checked
         });
         return false;
     }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import UserModel from '../../../../model/userModel';
 import "./Groups.scss";
+import UserPlate from './UserPlate';
 
 interface IGroupState {
     users: UserModel[];
@@ -39,8 +40,31 @@ export default class Group extends Component<{ header: string, users: UserModel[
         );
     }
 
+    public componentWillReceiveProps(newProps) {
+        const { isDescending, isSorted, users } = this.state;
+        const updatedUsers = isSorted ? Group.getSortedState(newProps.users, isDescending).users : newProps.users;
+        const hasChanged = updatedUsers.length !== users.length 
+                        || updatedUsers.some((user: UserModel, i: number) => users[i].id !== user.id);
+
+        if (!hasChanged) {
+            return;
+        }
+
+        this.setState({
+            isDescending,
+            isSorted,
+            users: updatedUsers
+        });
+    }
+
     private sort() {
         const isDescending = this.state.isSorted ? !this.state.isDescending : false;
+        this.setState(Group.getSortedState(this.state.users, isDescending));
+    }
+
+    // tslint:disable-next-line: member-ordering
+    private static getSortedState(users: UserModel[], isDescending: boolean): IGroupState {
+
         const comparer = isDescending ? 
                                 (a: UserModel, b: UserModel) => {
                                     return a.name > b.name ? -1 : 1;
@@ -49,20 +73,13 @@ export default class Group extends Component<{ header: string, users: UserModel[
                                 (a: UserModel, b: UserModel) => {
                                     return a.name > b.name ? 1 : -1;
                                 };
-
-        this.setState({
+       
+        const newState = {
             isDescending,
             isSorted: true,
-            users: this.state.users.sort(comparer)
-        });
+            users: users.sort(comparer)
+        };
+
+        return newState;
     }
 }
-
-const UserPlate = (props: { userModel: UserModel }): JSX.Element => {
-    return (
-        <li className="user-plate">
-            <label className="user-plate__name">{props.userModel.name}</label>
-            <label className="user-plate__email">{props.userModel.email}</label>
-        </li>
-    );
-};

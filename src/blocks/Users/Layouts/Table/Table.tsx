@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import UserModel from '../../../../model/userModel';
+import HeadingCell from './HeadingCell';
+import Line from './Line';
 import "./Table.scss";
 
 interface ITableState {
@@ -67,9 +69,34 @@ export default class Table extends Component<{users: UserModel[]}, ITableState> 
             </div>);
     }
 
-    private sort(field: string) {
+    public componentWillReceiveProps(newProps) {
 
+        const { isDescending, sortedField, users } = this.state;
+        const updatedUsers = sortedField 
+                    ? Table.getSortedState(newProps.users, isDescending, sortedField).users 
+                    : newProps.users;
+        const hasChanged = updatedUsers.length !== users.length 
+                        || updatedUsers.some((user: UserModel, i: number) => users[i].id !== user.id);
+
+        if (!hasChanged) {
+            return;
+        }
+
+        this.setState({
+            isDescending,
+            sortedField,
+            users: updatedUsers
+        });
+    }
+
+    private sort(field: string) {
         const isDescending = field === this.state.sortedField ? !this.state.isDescending : false;
+        this.setState(Table.getSortedState(this.state.users, isDescending, field));
+    }
+
+    // tslint:disable-next-line: member-ordering
+    private static getSortedState(users: UserModel[], isDescending: boolean, field: string): ITableState {
+
         const comparer = isDescending ? 
                                 (a: UserModel, b: UserModel) => {
                                     return a[field] > b[field] ? -1 : 1;
@@ -79,49 +106,12 @@ export default class Table extends Component<{users: UserModel[]}, ITableState> 
                                     return a[field] > b[field] ? 1 : -1;
                                 };
        
-        this.setState({
+        const newState = {
             isDescending,
             sortedField: field,
-            users: this.state.users.sort(comparer)
-        });
+            users: users.sort(comparer)
+        };
+
+        return newState;
     }
 }
-
-interface IHeadingCellProps { 
-    fieldName: string; 
-    title: string;
-    isDescending: boolean;
-    isSorted: boolean;
-    onClick: (field: string) => void;
-}
-
-const HeadingCell = (props: IHeadingCellProps): JSX.Element => {
-
-    const { fieldName, title, isDescending, isSorted, onClick } = props;
-    const clickHandler = (e: React.FormEvent<HTMLDivElement>) => onClick(fieldName);
-
-    const headerSortedClass = isSorted ? (" group-header_sorted" + (isDescending ? "_desc" : "_asc")) : "";
-    return (
-            <div 
-                className={"users-table__cell users-table__cell_heading" + headerSortedClass} 
-                onClick={clickHandler}
-            >
-                {title}
-            </div>);
-};
-
-const Line = (props: { userModel: UserModel}): JSX.Element => {
-
-    const {name, company, email, group, groupId, phone} = props.userModel;
-    const classes = "users-table__row" + (groupId === 0 ? " users-table__row_unmanaged" : "");
-    const line = (
-            <div className={classes}>
-                <div className="users-table__cell">{name}</div>
-                <div className="users-table__cell">{company}</div>
-                <div className="users-table__cell">{email}</div>
-                <div className="users-table__cell">{group}</div>
-                <div className="users-table__cell">{phone}</div>
-            </div>);
-
-    return line;
-};

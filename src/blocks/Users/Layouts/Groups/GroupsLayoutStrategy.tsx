@@ -15,10 +15,12 @@ export default class GroupsLayoutStrategy implements ILayoutStrategy {
 
     public setup(data: UserModel[], searchString?: string) {
 
+        this.searchStrategy.setup(searchString);
         const groups: UserGroup[] = [];
+
         for (const userModel of data) {
 
-            if (searchString && !this.searchStrategy.tryFind(userModel.name, searchString)) {
+            if (searchString && !this.searchStrategy.tryFind(userModel.name)) {
                 continue;
             }
 
@@ -47,7 +49,7 @@ export default class GroupsLayoutStrategy implements ILayoutStrategy {
     public render() {
         return (
                 <ul className="user-groups">
-                    {this.groups.map((val: UserGroup) => this.renderGroup(val))}
+                    {this.groups.map(this.renderGroup)}
                 </ul>);
     }
 

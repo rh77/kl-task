@@ -1,3 +1,4 @@
 export default interface ISearchStrategy {
-    tryFind(source: string, target: string): boolean;
+    setup(targetText?: string): void;
+    tryFind(source: string): boolean;
 }
