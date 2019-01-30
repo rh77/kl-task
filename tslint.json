@@ -6,6 +6,32 @@
             false
         ],
         "no-trailing-whitespace": false,
-        "trailing-comma": false
+        "trailing-comma": false,
+        "member-ordering": [
+            true,
+            {
+                "order": [
+                    "public-static-field",
+                    "protected-static-field",
+                    "private-static-field",
+                    
+                    "public-instance-field",
+                    "protected-instance-field",
+                    "private-instance-field",
+
+                    "public-constructor",
+                    "public-instance-method",
+                    "public-static-method",
+        
+                    "protected-constructor",
+                    "protected-instance-method",
+                    "protected-static-method",
+        
+                    "private-constructor",
+                    "private-instance-method",
+                    "private-static-method"
+                ]
+            }
+        ]
     }
 }

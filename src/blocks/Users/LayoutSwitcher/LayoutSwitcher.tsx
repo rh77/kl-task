@@ -9,14 +9,6 @@ export interface ISwitcherProps {
   
 export default class LayoutSwitcher extends Component<ISwitcherProps> {
 
-    private static getButtonClassName(type: string, isActive: boolean): string {
-        return `switcher__button switcher__button_type_${type} ${isActive ? "switcher__button_active" : ""}`;
-    }
-
-    private static handleClick(onSwitch: (viewType: ViewType) => void, viewType: ViewType) {
-        onSwitch(viewType);
-    }
-
     private handleGroupClick: () => void;
     private handleTileClick: () => void;
     private handleTableClick: () => void;
@@ -45,5 +37,13 @@ export default class LayoutSwitcher extends Component<ISwitcherProps> {
                 onClick={this.handleTableClick}
             />
         </div>);
+    }
+
+    private static getButtonClassName(type: string, isActive: boolean): string {
+        return `switcher__button switcher__button_type_${type} ${isActive ? "switcher__button_active" : ""}`;
+    }
+
+    private static handleClick(onSwitch: (viewType: ViewType) => void, viewType: ViewType) {
+        onSwitch(viewType);
     }
 }

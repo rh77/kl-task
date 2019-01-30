@@ -94,7 +94,6 @@ export default class Table extends Component<{users: UserModel[]}, ITableState> 
         this.setState(Table.getSortedState(this.state.users, isDescending, field));
     }
 
-    // tslint:disable-next-line: member-ordering
     private static getSortedState(users: UserModel[], isDescending: boolean, field: string): ITableState {
 
         const comparer = isDescending ? 

@@ -62,7 +62,6 @@ export default class Group extends Component<{ header: string, users: UserModel[
         this.setState(Group.getSortedState(this.state.users, isDescending));
     }
 
-    // tslint:disable-next-line: member-ordering
     private static getSortedState(users: UserModel[], isDescending: boolean): IGroupState {
 
         const comparer = isDescending ? 

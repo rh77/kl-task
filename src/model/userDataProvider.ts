@@ -48,7 +48,6 @@ export default class UserDataProvider {
                 });
     }
 
-// tslint:disable-next-line: member-ordering
     private static async downloadString(url: string): Promise<string> {
         return new Promise((resolve, reject) => {
 
