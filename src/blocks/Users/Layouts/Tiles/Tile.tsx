@@ -29,14 +29,14 @@ export default class Tile extends Component<{ userModel: UserModel }, { loaded: 
         const groupClassName = "user-tile__group" + (groupId === 0 ? " user-tile__group_unmanaged" : "");
         return (
             <li className="user-tiles__tile user-tile">
-                <div className="user-tile__check-plate" onClick={this.onCheckedChanged}>
+                <label className="user-tile__check-plate">
                     <input 
                         className="user-tile__check" 
                         type="checkbox" 
                         checked={this.state.checked} 
                         onChange={this.onCheckedChanged}
                     />
-                </div>
+                </label>
                 <button className="user-tile__upload-button"/>
                 <label className="user-tile__name">{name}</label>
                 <img className="user-tile__picture" src={pictureSrc}/>

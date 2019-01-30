@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { RouterProvider } from './RouterContext';
 
-class Router extends Component<any, { hash: string }> {
+class Router extends Component<{ onRouteChange?: (route: string) => void, default: string }, { hash: string }> {
 
-    private hashListener: EventListener;
+    private hashListener: () => void;
 
     constructor(props: any) {
         super(props);
@@ -13,7 +13,14 @@ class Router extends Component<any, { hash: string }> {
         };
 
         this.hashListener = () => {
-            this.setState({ hash : getHash() });
+            let hash = getHash();
+            if (!hash || hash.length === 0) {
+                hash = props.default;
+            }
+            this.setState({ hash });
+            if (props.onRouteChange) {
+                props.onRouteChange(hash);
+            }
         };
 
         function getHash() {
@@ -27,6 +34,7 @@ class Router extends Component<any, { hash: string }> {
 
     public componentDidMount() {
         window.addEventListener("hashchange", this.hashListener);
+        this.hashListener();
     }
 
     public componentWillUnmount() {

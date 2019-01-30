@@ -14,6 +14,7 @@ class App extends Component {
 
     UserDataProvider.instance.requestUsersData("https://api.myjson.com/bins/sz7d4");
     //UserDataProvider.instance.requestUsersData("http://www.json-generator.com/api/json/get/ceVZNLiQUi?indent=2");
+    this.routeChangeHandler = this.routeChangeHandler.bind(this);
   }
 
   public render(): JSX.Element {
@@ -25,12 +26,20 @@ class App extends Component {
             <a className="app__link" href="#users">Users</a>
           </div>
         </header>
-        <Router>
-          <Route path="welcome" showWhenEmpty={true} block={Welcome}/>
+        <Router onRouteChange={this.routeChangeHandler} default="welcome">
+          <Route path="welcome" block={Welcome}/>
           <Route path="users" block={Users}/>
         </Router>
       </div>
     );
+  }
+
+  private routeChangeHandler(route: string): void {
+    const activeModifierName = "app__link_active";
+    document.querySelectorAll(".app__link")
+      .forEach((el: Element) => el.classList.remove(activeModifierName));
+    document.querySelectorAll(`a[href='#${route}']`)
+      .forEach((el: Element) => el.classList.add(activeModifierName));
   }
 }
 

@@ -27,6 +27,7 @@
     text-decoration: none;
     padding-left: 1.2ch;
     padding-right: 1.2ch;
+    opacity: 0.4;
   
     &::before {
       content: "[ ";
@@ -34,6 +35,18 @@
   
     &::after {
       content: " ]";
+    }
+
+    &:hover {
+      opacity: 0.7;
+    }
+
+    &_active {
+      opacity: 1;
+
+      &:hover {
+          opacity: 1;
+      }
     }
   }
 }

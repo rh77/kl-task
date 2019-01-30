@@ -101,8 +101,9 @@ $tile-height: 250px;
         position: absolute;
         top: 0px;
         left: 0px;
-        width: 45px;
-        height: 45px;
+        bottom: 0px;
+        right: 0px;
+        cursor: pointer;
     }
 
     &__upload-button {
