@@ -6,17 +6,20 @@ import ISearchStrategy from '../ISearchStrategy';
 import Group from './Group';
 import "./Groups.scss";
 
-type UserGroup = [string, UserModel[]];
+interface IUserGroup { 
+    name: string; 
+    users: UserModel[];
+}
 
 export default class GroupsLayoutStrategy implements ILayoutStrategy {
     
-    private groups: UserGroup[] = [];
+    private groups: IUserGroup[] = [];
     private searchStrategy: ISearchStrategy = new CaseInsensitiveSearchStrategy();
 
     public setup(data: UserModel[], searchString?: string) {
 
         this.searchStrategy.setup(searchString);
-        const groups: UserGroup[] = [];
+        const groups: IUserGroup[] = [];
 
         for (const userModel of data) {
 
@@ -24,23 +27,23 @@ export default class GroupsLayoutStrategy implements ILayoutStrategy {
                 continue;
             }
 
-            let targetGroup: UserGroup | null = null;
+            let targetGroup: IUserGroup | null = null;
             for (const group of groups) {
-                if (group[0] === userModel.group) {
+                if (group.name === userModel.group) {
                     targetGroup = group;
                     break;
                 }
             }
 
-            let userGroup: UserGroup;
+            let userGroup: IUserGroup;
             if (!targetGroup) {
-                userGroup = [userModel.group, []];
+                userGroup = { name: userModel.group, users: [] };
                 groups.push(userGroup);
             } else {
                 userGroup = targetGroup;
             }
 
-            userGroup[1].push(userModel);
+            userGroup.users.push(userModel);
         }
 
         this.groups = groups;
@@ -53,9 +56,8 @@ export default class GroupsLayoutStrategy implements ILayoutStrategy {
                 </ul>);
     }
 
-    private renderGroup(userGroup: UserGroup): JSX.Element {
-        const groupName = userGroup[0];
-        const groupUsers = userGroup[1];
-        return <Group key={groupName} header={groupName} users={groupUsers}/>;
+    private renderGroup(userGroup: IUserGroup): JSX.Element {
+        const { name, users } = userGroup;
+        return <Group key={name} header={name} users={users}/>;
     }
 }
