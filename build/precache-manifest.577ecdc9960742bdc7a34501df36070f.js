@@ -20,19 +20,19 @@ self.__precacheManifest = [
     "url": "/kl-task/static/js/runtime~main.9dc895c0.js"
   },
   {
-    "revision": "03d58629c442156772ff",
-    "url": "/kl-task/static/js/main.03d58629.chunk.js"
+    "revision": "7d6342be04df74f39772",
+    "url": "/kl-task/static/js/main.7d6342be.chunk.js"
   },
   {
     "revision": "65c0cdaf862c1988a133",
     "url": "/kl-task/static/js/1.65c0cdaf.chunk.js"
   },
   {
-    "revision": "03d58629c442156772ff",
-    "url": "/kl-task/static/css/main.0729597b.chunk.css"
+    "revision": "7d6342be04df74f39772",
+    "url": "/kl-task/static/css/main.d52345fb.chunk.css"
   },
   {
-    "revision": "b75af1b6ec1c8d95110f07301bc5f5ed",
+    "revision": "1662381c9be0d6ca943ad8c0f62acb8c",
     "url": "/kl-task/index.html"
   }
 ];

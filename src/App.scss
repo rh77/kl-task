@@ -27,7 +27,7 @@
         text-decoration: none;
         padding-left: 1.2ch;
         padding-right: 1.2ch;
-        opacity: 0.4;
+        opacity: 0.6;
       
         &::before {
             content: "[ ";
@@ -38,7 +38,7 @@
         }
 
         &:hover {
-            opacity: 0.7;
+            opacity: 0.8;
         }
 
         &_active {
