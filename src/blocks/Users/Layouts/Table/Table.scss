@@ -46,11 +46,11 @@ $unmanaged-even-color: rgb(223, 232, 240);
         }
 
         &_sorted_asc::after {
-            content: " ▴";
+            content: " ⏶";
         }
     
         &_sorted_desc::after {
-            content: " ▾";
+            content: " ⏷";
         }
     }
 }

@@ -46,11 +46,11 @@ $soft-text-color: rgb(68, 68, 68);
     @include header-label-padding;
 
     &_sorted_asc::after {
-        content: " ▴";
+        content: " ⏶";
     }
 
     &_sorted_desc::after {
-        content: " ▾";
+        content: " ⏷";
     }
 }
 
