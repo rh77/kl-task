@@ -13,7 +13,7 @@ export default class Search extends Component<ISearchProps> {
     constructor(props: ISearchProps) {
         super(props);
         
-        this.throttledSearch = Search.getThrottled(props.onSearch, 200);
+        this.throttledSearch = Search.getThrottled(props.onSearch, 300);
         this.onSearch = this.onSearch.bind(this);
     }
 
@@ -39,12 +39,14 @@ export default class Search extends Component<ISearchProps> {
         : (text: string) => void {
 
         let isWaiting: boolean = false;
-        let capturedText: string | null = null;
+        let capturedText: string = "";
+        let isTextUpdated: boolean = false;
 
         const throttled = (text: string) => {
           
             if (isWaiting) {
                 capturedText = text;
+                isTextUpdated = true;
                 return;
             }
 
@@ -56,12 +58,13 @@ export default class Search extends Component<ISearchProps> {
 
                 isWaiting = false;
 
-                if (!capturedText) {
+                if (!isTextUpdated) {
                     return;
                 }
 
                 throttled(capturedText);
-                capturedText = null;
+                capturedText = "";
+                isTextUpdated = false;
 
             }, timeout);
         };
