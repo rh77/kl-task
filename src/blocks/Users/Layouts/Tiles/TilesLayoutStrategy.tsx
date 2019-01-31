@@ -33,7 +33,23 @@ export default class TilesLayoutStrategy implements ILayoutStrategy {
         
         const data = this.users.map(this.renderTile).concat(this.placeholders);
 
-        return <ul className="user-tiles">{data}</ul>;
+        return (
+            <div>
+                <div className="sort">
+                    <label className="sort__label">Sort by:</label>
+                    <select className="sort__select" size={1}>
+                        <option value="name">name</option>
+                        <option value="group">group</option>
+                        <option value="group-name">group, then by name</option>
+                    </select>
+                    <select className="sort__select" size={1}>
+                        <option value="name">ascending</option>
+                        <option value="group">descending</option>
+                    </select>
+                </div>
+                <ul className="user-tiles">{data}</ul>
+            </div>
+            );
     }
 
     private renderTile(userModel: UserModel): JSX.Element {

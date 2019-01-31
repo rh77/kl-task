@@ -26,6 +26,7 @@ export default class Search extends Component<ISearchProps> {
                     type="search" 
                     placeholder={this.props.placeholder} 
                     onInput={this.onSearch} 
+                    autoFocus={true}
                 />
             </div>);
     }
