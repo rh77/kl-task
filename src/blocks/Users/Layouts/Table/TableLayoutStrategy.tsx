@@ -11,16 +11,19 @@ export default class TableLayoutStrategy implements ILayoutStrategy {
     private searchStrategy: ISearchStrategy = new CaseInsensitiveSearchStrategy();
 
     public setup(users: UserModel[], searchString?: string) {
+        
+        this.searchStrategy.setTargetText(searchString);
+
         if (!searchString) {
             this.users = users;
             return;
         }
 
-        this.searchStrategy.setup(searchString);
         this.users = users.filter((user) => this.searchStrategy.tryFind(user.name));      
     }
 
     public render() {
-        return <Table users={this.users}/>;
+        const highlighter = this.searchStrategy.getHighlighterFunction();
+        return <Table users={this.users} highlighter={highlighter}/>;
     }
 }

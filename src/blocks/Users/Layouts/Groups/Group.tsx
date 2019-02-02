@@ -1,20 +1,32 @@
 import React, { Component } from 'react';
 import UserModel from '../../../../model/userModel';
+import { HighlighterFunc } from '../ISearchStrategy';
 import "./Groups.scss";
 import UserPlate from './UserPlate';
 
-interface IGroupState {
+interface ISortedState {
     users: UserModel[];
     isSorted: boolean;
     isDescending: boolean;
 }
 
-export default class Group extends Component<{ header: string, users: UserModel[] }, IGroupState> {
+interface IGroupState extends ISortedState {
+    highlighter: HighlighterFunc; 
+}
 
-    constructor(props) {
+interface IGroupProps {
+    header: string;
+    highlighter: HighlighterFunc; 
+    users: UserModel[];
+}
+
+export default class Group extends Component<IGroupProps, IGroupState> {
+
+    constructor(props: IGroupProps) {
         super(props);
 
         this.state = {
+            highlighter: props.highlighter,
             isDescending: false,
             isSorted: false,
             users: props.users
@@ -25,14 +37,14 @@ export default class Group extends Component<{ header: string, users: UserModel[
 
     public render() {
         const { header } = this.props;
-        const { users, isDescending, isSorted } = this.state;
+        const { users, isDescending, isSorted, highlighter } = this.state;
         const headerSortedClass = isSorted ? (" group-header_sorted" + (isDescending ? "_desc" : "_asc")) : "";
         return (
             <li className="user-groups__group">
                 <div className="user-group-wrapper">
                     <div className={"group-header" + headerSortedClass} onClick={this.sort}>{header}</div>
                     <ul className="user-plates-list">
-                        {users.map((user: UserModel) => <UserPlate key={user.id} userModel={user}/>)}
+                        {users.map((user) => <UserPlate key={user.id} userModel={user} highlighter={highlighter}/>)}
                     </ul>
                     <label className="group-footer-label">Add user...</label>
                 </div>
@@ -40,10 +52,11 @@ export default class Group extends Component<{ header: string, users: UserModel[
         );
     }
 
-    public componentWillReceiveProps(newProps) {
+    public componentWillReceiveProps(newProps: IGroupProps) {
         const { isDescending, isSorted, users } = this.state;
         const updatedUsers = isSorted ? Group.getSortedState(newProps.users, isDescending).users : newProps.users;
-        const hasChanged = updatedUsers.length !== users.length 
+        const hasChanged = newProps.highlighter !== this.props.highlighter
+                        || updatedUsers.length !== users.length 
                         || updatedUsers.some((user: UserModel, i: number) => users[i].id !== user.id);
 
         if (!hasChanged) {
@@ -51,6 +64,7 @@ export default class Group extends Component<{ header: string, users: UserModel[
         }
 
         this.setState({
+            highlighter: newProps.highlighter,
             isDescending,
             isSorted,
             users: updatedUsers
@@ -62,7 +76,7 @@ export default class Group extends Component<{ header: string, users: UserModel[
         this.setState(Group.getSortedState(this.state.users, isDescending));
     }
 
-    private static getSortedState(users: UserModel[], isDescending: boolean): IGroupState {
+    private static getSortedState(users: UserModel[], isDescending: boolean): ISortedState {
 
         const comparer = isDescending ? 
                                 (a: UserModel, b: UserModel) => {

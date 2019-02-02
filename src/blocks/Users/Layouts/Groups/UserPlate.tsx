@@ -1,11 +1,21 @@
 import React from 'react';
 import UserModel from '../../../../model/userModel';
+import HighlightedToken from '../Common/HighlightedToken';
+import { HighlighterFunc } from '../ISearchStrategy';
 import "./Groups.scss";
 
-const UserPlate = (props: { userModel: UserModel }): JSX.Element => {
+interface IUserPlateProps {
+    userModel: UserModel;
+    highlighter: HighlighterFunc;
+}
+
+const UserPlate = (props: IUserPlateProps): JSX.Element => {
+
+    const highlightedNameTokens = props.highlighter(props.userModel.name);
+    const highlightedName = highlightedNameTokens.map((token, i) => <HighlightedToken token={token} key={i}/>);
     return (
         <li className="user-plate">
-            <label className="user-plate__name">{props.userModel.name}</label>
+            <label className="user-plate__name">{highlightedName}</label>
             <label className="user-plate__email">{props.userModel.email}</label>
         </li>
     );

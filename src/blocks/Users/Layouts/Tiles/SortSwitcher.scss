@@ -1,0 +1,33 @@
+@import "../../../variables.scss";
+
+.sort-switcher {
+    display: inline-block;
+    align-items: baseline;
+
+    &__select,
+    &__label {
+        font-size: calc(#{$min-font-size} + 0.5vmin);
+    }
+
+    &__label {
+        padding-right: 1ch;
+        color: $pale-text-color;
+    }
+
+    &__select {
+        outline: none;
+        border: 2px solid $super-extra-light-gray;
+        padding-left: 0.5ch;
+        padding-right: 0.5ch;
+        margin-left: 0.5ch;
+        margin-right: 0.5ch;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+        color: $pale-text-color;
+
+        &:disabled {
+            color: lightgray;
+        }
+    }
+}

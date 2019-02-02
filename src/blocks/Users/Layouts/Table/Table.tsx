@@ -1,21 +1,32 @@
 import React, {Component} from 'react';
 import UserModel from '../../../../model/userModel';
+import { HighlighterFunc } from '../ISearchStrategy';
 import HeadingCell from './HeadingCell';
 import Line from './Line';
 import "./Table.scss";
 
-interface ITableState {
+interface ISortedState {
     users: UserModel[];
     sortedField?: string;
     isDescending: boolean;
 }
 
-export default class Table extends Component<{users: UserModel[]}, ITableState> {
+interface ITableState extends ISortedState {
+    highlighter: HighlighterFunc;
+}
 
-    constructor(props) {
+interface ITableProps {
+    users: UserModel[];
+    highlighter: HighlighterFunc;
+}
+
+export default class Table extends Component<ITableProps, ITableState> {
+
+    constructor(props: ITableProps) {
         super(props);
 
         this.state = {
+            highlighter: props.highlighter,
             isDescending: false,
             sortedField: undefined,
             users: props.users
@@ -25,6 +36,8 @@ export default class Table extends Component<{users: UserModel[]}, ITableState> 
     }
 
     public render() {
+
+        const { users, highlighter } = this.state;
 
         return (
             <div className="users-table">
@@ -65,17 +78,18 @@ export default class Table extends Component<{users: UserModel[]}, ITableState> 
                         onClick={this.sort}
                     />
                 </div>
-                {this.state.users.map((userModel: UserModel) => <Line key={userModel.id} userModel={userModel} />)}
+                {users.map((userModel) => <Line key={userModel.id} userModel={userModel} highlighter={highlighter}/>)}
             </div>);
     }
 
-    public componentWillReceiveProps(newProps) {
+    public componentWillReceiveProps(newProps: ITableProps) {
 
         const { isDescending, sortedField, users } = this.state;
         const updatedUsers = sortedField 
                     ? Table.getSortedState(newProps.users, isDescending, sortedField).users 
                     : newProps.users;
-        const hasChanged = updatedUsers.length !== users.length 
+        const hasChanged = newProps.highlighter !== this.props.highlighter
+                        || updatedUsers.length !== users.length 
                         || updatedUsers.some((user: UserModel, i: number) => users[i].id !== user.id);
 
         if (!hasChanged) {
@@ -83,6 +97,7 @@ export default class Table extends Component<{users: UserModel[]}, ITableState> 
         }
 
         this.setState({
+            highlighter: newProps.highlighter,
             isDescending,
             sortedField,
             users: updatedUsers
@@ -91,10 +106,10 @@ export default class Table extends Component<{users: UserModel[]}, ITableState> 
 
     private sort(field: string) {
         const isDescending = field === this.state.sortedField ? !this.state.isDescending : false;
-        this.setState(Table.getSortedState(this.state.users, isDescending, field));
+        this.setState(Table.getSortedState(this.props.users, isDescending, field));
     }
 
-    private static getSortedState(users: UserModel[], isDescending: boolean, field: string): ITableState {
+    private static getSortedState(users: UserModel[], isDescending: boolean, field: string): ISortedState {
 
         const comparer = isDescending ? 
                                 (a: UserModel, b: UserModel) => {

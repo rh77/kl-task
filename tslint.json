@@ -7,6 +7,7 @@
         ],
         "no-trailing-whitespace": false,
         "trailing-comma": false,
+        "no-bitwise": false,
         "member-ordering": [
             true,
             {
