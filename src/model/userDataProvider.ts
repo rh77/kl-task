@@ -31,7 +31,7 @@ export default class UserDataProvider {
     }
     
 // tslint:disable-next-line: no-empty
-    public onDataReady(): void {}
+    public onUserDataReady(): void {}
 
     public requestUsersData(url: string): void {
 
@@ -40,7 +40,7 @@ export default class UserDataProvider {
         UserDataProvider.downloadString(url)
                 .then((result: string) => {
                     this.data = buildUserModels(result);
-                    this.onDataReady();
+                    this.onUserDataReady();
                 })
                 .catch((error: Error) => {
                     alert(error.message);

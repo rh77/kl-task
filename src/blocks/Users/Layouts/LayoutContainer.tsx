@@ -11,6 +11,7 @@ import TilesLayoutStrategy from './Tiles/TilesLayoutStrategy';
 
 interface ILayoutContainerState {
     data: UserModel[];
+    loaded: boolean;
 }
 
 class LayoutContainer extends Component<ILayoutProps, ILayoutContainerState> {
@@ -21,12 +22,14 @@ class LayoutContainer extends Component<ILayoutProps, ILayoutContainerState> {
         super(props);
 
         this.state = {
-            data: UserDataProvider.instance.userData
+            data: UserDataProvider.instance.userData,
+            loaded: UserDataProvider.instance.userData.length > 0
         };
 
-        UserDataProvider.instance.onDataReady = () => {
+        UserDataProvider.instance.onUserDataReady = () => {
             this.setState({
-                data: UserDataProvider.instance.userData
+                data: UserDataProvider.instance.userData,
+                loaded: true
             });
         };
 
@@ -45,10 +48,18 @@ class LayoutContainer extends Component<ILayoutProps, ILayoutContainerState> {
 
     private renderLayout(layout: ILayoutStrategy): JSX.Element {
         layout.setup(this.state.data, this.props.searchString);
+        const displayNoneStyle = {
+            display: "none"
+        };
         return (
-            <div className="users-container__content-panel">
-                {layout.render()}
-            </div>
+            <React.Fragment>
+                <div className="users-container__loader" style={this.state.loaded ? displayNoneStyle : {}}>
+                    Loading...
+                </div>
+                <div className="users-container__content-panel" style={this.state.loaded ? {} : displayNoneStyle}>
+                    {layout.render()}
+                </div>
+            </React.Fragment>
         );
     }
 }
