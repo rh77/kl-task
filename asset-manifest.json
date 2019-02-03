@@ -1,15 +1,15 @@
 {
-  "main.css": "/kl-task/static/css/main.5f177d5b.chunk.css",
-  "main.js": "/kl-task/static/js/main.489a99b0.chunk.js",
-  "main.js.map": "/kl-task/static/js/main.489a99b0.chunk.js.map",
-  "static/js/1.a6de6629.chunk.js": "/kl-task/static/js/1.a6de6629.chunk.js",
-  "static/js/1.a6de6629.chunk.js.map": "/kl-task/static/js/1.a6de6629.chunk.js.map",
+  "main.css": "/kl-task/static/css/main.16bb65b0.chunk.css",
+  "main.js": "/kl-task/static/js/main.fa25b9fa.chunk.js",
+  "main.js.map": "/kl-task/static/js/main.fa25b9fa.chunk.js.map",
+  "static/js/1.97317916.chunk.js": "/kl-task/static/js/1.97317916.chunk.js",
+  "static/js/1.97317916.chunk.js.map": "/kl-task/static/js/1.97317916.chunk.js.map",
   "runtime~main.js": "/kl-task/static/js/runtime~main.9dc895c0.js",
   "runtime~main.js.map": "/kl-task/static/js/runtime~main.9dc895c0.js.map",
   "static/media/Tiles.scss": "/kl-task/static/media/cloud-upload.da552689.svg",
   "static/media/LayoutSwitcher.scss": "/kl-task/static/media/tile-view.c0e4a0b3.svg",
-  "static/css/main.5f177d5b.chunk.css.map": "/kl-task/static/css/main.5f177d5b.chunk.css.map",
+  "static/css/main.16bb65b0.chunk.css.map": "/kl-task/static/css/main.16bb65b0.chunk.css.map",
   "index.html": "/kl-task/index.html",
-  "precache-manifest.3b06b56a6b3c1d1d92d4eb54674de7cd.js": "/kl-task/precache-manifest.3b06b56a6b3c1d1d92d4eb54674de7cd.js",
+  "precache-manifest.a1e2cae665e3d7efbcf2c7b5c333790f.js": "/kl-task/precache-manifest.a1e2cae665e3d7efbcf2c7b5c333790f.js",
   "service-worker.js": "/kl-task/service-worker.js"
 }
