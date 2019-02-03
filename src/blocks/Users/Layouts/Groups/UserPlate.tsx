@@ -1,7 +1,7 @@
 import React from 'react';
 import UserModel from '../../../../model/userModel';
-import HighlightedToken from '../Common/HighlightedToken';
-import { HighlighterFunc } from '../ISearchStrategy';
+import HighlightedToken from '../Common/HighlightedToken/HighlightedToken';
+import { HighlighterFunc } from '../Common/SearchStrategy/ISearchStrategy';
 import "./Groups.scss";
 
 interface IUserPlateProps {

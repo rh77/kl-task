@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import UserModel from '../../../../model/userModel';
-import { HighlighterFunc } from '../ISearchStrategy';
+import { HighlighterFunc } from '../Common/SearchStrategy/ISearchStrategy';
+import SorterHelper, { ISortUsersInfo } from '../Common/SorterHelper';
 import SortSwitcher from './SortSwitcher/SortSwitcher';
 import Tile from './Tile';
 import "./Tiles.scss";
@@ -10,13 +11,7 @@ interface ITilesProps {
     highlighter: HighlighterFunc;
 }
 
-interface ISortedState {
-    users: UserModel[];
-    sortedFields: string[];
-    isDescending: boolean;
-}
-
-interface ITilesState extends ISortedState {
+interface ITilesState extends ISortUsersInfo {
     highlighter: HighlighterFunc;
 }
 
@@ -61,9 +56,16 @@ export default class Tiles extends Component<ITilesProps, ITilesState> {
     public componentWillReceiveProps(newProps: ITilesProps) {
 
         const { isDescending, sortedFields, users } = this.state;
+        const sortInfo: ISortUsersInfo = {
+            isDescending,
+            sortedFields,
+            users: newProps.users
+        };
         const updatedUsers = sortedFields.length 
-                    ? Tiles.getSortedState(newProps.users, isDescending, sortedFields).users 
+                    ? SorterHelper.sortUsers(sortInfo).users 
                     : newProps.users;
+        sortInfo.users = updatedUsers;
+
         const hasChanged = newProps.highlighter !== this.props.highlighter
                         || updatedUsers.length !== users.length 
                         || updatedUsers.some((user: UserModel, i: number) => users[i].id !== user.id);
@@ -74,9 +76,7 @@ export default class Tiles extends Component<ITilesProps, ITilesState> {
 
         this.setState({
             highlighter: newProps.highlighter,
-            isDescending,
-            sortedFields,
-            users: updatedUsers
+            ...sortInfo
         });
     }
 
@@ -84,50 +84,12 @@ export default class Tiles extends Component<ITilesProps, ITilesState> {
         if (!fields.length) {
             return;
         }
-
-        this.setState(Tiles.getSortedState(this.props.users, isDescending, fields));
-    }
-
-    private static getSortedState(users: UserModel[], isDescending: boolean, fields: string[]): ISortedState {
-
-        let comparer: (a: UserModel, b: UserModel) => number;
-
-        if (fields.length === 1) {
-            const field = fields[0];
-            if (isDescending) { 
-                comparer = (a, b) => {
-                    return a[field] > b[field] ? -1 : 1;
-                };
-            } else {
-                comparer = (a, b) => {
-                    return a[field] > b[field] ? 1 : -1;
-                };
-            }
-        } else {
-
-            const greater = isDescending ? -1 : 1;
-            const lower = isDescending ? 1 : -1;
-            comparer = (a, b) => {
-                for (const field of fields) {
-                    const aField = a[field];
-                    const bField = b[field];
-                    if (aField === bField) {
-                        continue;
-                    }
-
-                    return aField > bField ? greater : lower;
-                }
-
-                return 0;
-            };
-        }
-       
-        const newState = {
+        const sortInfo: ISortUsersInfo = {
             isDescending,
             sortedFields: fields,
-            users: users.sort(comparer)
+            users: this.props.users
         };
-
-        return newState;
+        SorterHelper.sortUsers(sortInfo);
+        this.setState(sortInfo);
     }
 }

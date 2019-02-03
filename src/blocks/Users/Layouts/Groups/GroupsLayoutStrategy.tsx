@@ -1,8 +1,8 @@
 import React from 'react';
 import UserModel from '../../../../model/userModel';
-import CaseInsensitiveSearchStrategy from '../CaseInsensitiveSearchStrategy';
-import ILayoutStrategy from '../ILayoutStrategy';
-import ISearchStrategy, { HighlighterFunc } from '../ISearchStrategy';
+import ILayoutStrategy from '../Common/LayoutStrategy/ILayoutStrategy';
+import CaseInsensitiveSearchStrategy from '../Common/SearchStrategy/CaseInsensitiveSearchStrategy';
+import ISearchStrategy, { HighlighterFunc } from '../Common/SearchStrategy/ISearchStrategy';
 import Group from './Group';
 import "./Groups.scss";
 

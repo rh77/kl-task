@@ -1,4 +1,5 @@
-import ISearchStrategy, { HighlighterFunc, IHighlightToken } from "./ISearchStrategy";
+import IHighlightToken from "../HighlightedToken/IHighlightToken";
+import ISearchStrategy, { HighlighterFunc } from "./ISearchStrategy";
 
 export default class CaseInsensitiveSearchStrategy implements ISearchStrategy {
     private target?: string;

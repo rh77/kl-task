@@ -1,3 +1,5 @@
+import IHighlightToken from "../HighlightedToken/IHighlightToken";
+
 export default interface ISearchStrategy {
     setTargetText(targetText?: string): void;
     tryFind(source: string): boolean;
@@ -5,8 +7,3 @@ export default interface ISearchStrategy {
 }
 
 export type HighlighterFunc = (source: string) => IHighlightToken[];
-
-export interface IHighlightToken {
-    text: string;
-    isHighlighted: boolean;
-}

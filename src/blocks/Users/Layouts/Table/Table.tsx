@@ -1,17 +1,12 @@
 import React, {Component} from 'react';
 import UserModel from '../../../../model/userModel';
-import { HighlighterFunc } from '../ISearchStrategy';
+import { HighlighterFunc } from '../Common/SearchStrategy/ISearchStrategy';
+import SorterHelper, { ISortUsersInfo } from '../Common/SorterHelper';
 import HeadingCell from './HeadingCell';
 import Line from './Line';
 import "./Table.scss";
 
-interface ISortedState {
-    users: UserModel[];
-    sortedField?: string;
-    isDescending: boolean;
-}
-
-interface ITableState extends ISortedState {
+interface ITableState extends ISortUsersInfo {
     highlighter: HighlighterFunc;
 }
 
@@ -28,7 +23,7 @@ export default class Table extends Component<ITableProps, ITableState> {
         this.state = {
             highlighter: props.highlighter,
             isDescending: false,
-            sortedField: undefined,
+            sortedFields: [],
             users: props.users
         };
 
@@ -45,35 +40,35 @@ export default class Table extends Component<ITableProps, ITableState> {
                     <HeadingCell 
                         fieldName="name" 
                         title="Name" 
-                        isSorted={this.state.sortedField === "name"} 
+                        isSorted={this.state.sortedFields.includes("name")} 
                         isDescending={this.state.isDescending} 
                         onClick={this.sort}
                     />
                     <HeadingCell 
                         fieldName="company" 
                         title="Company" 
-                        isSorted={this.state.sortedField === "company"} 
+                        isSorted={this.state.sortedFields.includes("company")} 
                         isDescending={this.state.isDescending} 
                         onClick={this.sort}
                     />
                     <HeadingCell 
                         fieldName="email" 
                         title="Email" 
-                        isSorted={this.state.sortedField === "email"} 
+                        isSorted={this.state.sortedFields.includes("email")} 
                         isDescending={this.state.isDescending} 
                         onClick={this.sort}
                     />
                     <HeadingCell 
                         fieldName="group" 
                         title="Group" 
-                        isSorted={this.state.sortedField === "group"} 
+                        isSorted={this.state.sortedFields.includes("group")} 
                         isDescending={this.state.isDescending} 
                         onClick={this.sort}
                     />
                     <HeadingCell 
                         fieldName="phone" 
                         title="Phone" 
-                        isSorted={this.state.sortedField === "phone"} 
+                        isSorted={this.state.sortedFields.includes("phone")} 
                         isDescending={this.state.isDescending} 
                         onClick={this.sort}
                     />
@@ -84,10 +79,17 @@ export default class Table extends Component<ITableProps, ITableState> {
 
     public componentWillReceiveProps(newProps: ITableProps) {
 
-        const { isDescending, sortedField, users } = this.state;
-        const updatedUsers = sortedField 
-                    ? Table.getSortedState(newProps.users, isDescending, sortedField).users 
-                    : newProps.users;
+        const { isDescending, sortedFields, users } = this.state;
+        const sortInfo: ISortUsersInfo = {
+            isDescending,
+            sortedFields,
+            users: newProps.users
+        };
+        const updatedUsers = sortedFields.length 
+                                ? SorterHelper.sortUsers(sortInfo).users 
+                                : newProps.users;
+        sortInfo.users = updatedUsers;
+
         const hasChanged = newProps.highlighter !== this.props.highlighter
                         || updatedUsers.length !== users.length 
                         || updatedUsers.some((user: UserModel, i: number) => users[i].id !== user.id);
@@ -98,34 +100,19 @@ export default class Table extends Component<ITableProps, ITableState> {
 
         this.setState({
             highlighter: newProps.highlighter,
-            isDescending,
-            sortedField,
-            users: updatedUsers
+            ...sortInfo
         });
     }
 
     private sort(field: string) {
-        const isDescending = field === this.state.sortedField ? !this.state.isDescending : false;
-        this.setState(Table.getSortedState(this.props.users, isDescending, field));
-    }
-
-    private static getSortedState(users: UserModel[], isDescending: boolean, field: string): ISortedState {
-
-        const comparer = isDescending ? 
-                                (a: UserModel, b: UserModel) => {
-                                    return a[field] > b[field] ? -1 : 1;
-                                }
-                            :
-                                (a: UserModel, b: UserModel) => {
-                                    return a[field] > b[field] ? 1 : -1;
-                                };
-       
-        const newState = {
+        const isDescending = this.state.sortedFields.includes(field) ? !this.state.isDescending : false;
+        const sortedFields = this.state.sortedFields.includes(field) ? this.state.sortedFields : [ field ];
+        const sortInfo: ISortUsersInfo = {
             isDescending,
-            sortedField: field,
-            users: users.sort(comparer)
+            sortedFields,
+            users: this.props.users
         };
-
-        return newState;
+        SorterHelper.sortUsers(sortInfo);
+        this.setState(sortInfo);
     }
 }

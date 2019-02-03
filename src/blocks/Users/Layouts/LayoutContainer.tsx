@@ -4,10 +4,13 @@ import UserModel from '../../../model/userModel';
 import ViewType from "../Enums/ViewType";
 import ILayoutProps from '../Props/ILayoutProps';
 import "../Users.scss";
+import ILayoutStrategy from './Common/LayoutStrategy/ILayoutStrategy';
+import SimpleLayoutStrategy, { ElementFactoryMethod } from './Common/LayoutStrategy/SimpleLayoutStrategy';
 import GroupsLayoutStrategy from './Groups/GroupsLayoutStrategy';
-import ILayoutStrategy from './ILayoutStrategy';
-import TableLayoutStrategy from './Table/TableLayoutStrategy';
-import TilesLayoutStrategy from './Tiles/TilesLayoutStrategy';
+import Table from './Table/Table';
+import "./Table/Table.scss";
+import Tiles from './Tiles/Tiles';
+import "./Tiles/Tiles.scss";
 
 interface ILayoutContainerState {
     data: UserModel[];
@@ -33,16 +36,21 @@ class LayoutContainer extends Component<ILayoutProps, ILayoutContainerState> {
             });
         };
 
+        const createTable: ElementFactoryMethod = 
+            (users, highlighter) => <Table users={users} highlighter={highlighter}/>;
+        const cteateTiles: ElementFactoryMethod =
+            (users, highlighter) => <Tiles users={users} highlighter={highlighter}/>;
+            
         this.layouts = {
             [ViewType.Group]: new GroupsLayoutStrategy(),
-            [ViewType.Table]: new TableLayoutStrategy(),
-            [ViewType.Tile]: new TilesLayoutStrategy() 
+            [ViewType.Table]: new SimpleLayoutStrategy(createTable),
+            [ViewType.Tile]: new SimpleLayoutStrategy(cteateTiles) 
         };
     }
     
     public render() {
   
-        const layout = this.layouts[this.props.viewType] || new TilesLayoutStrategy();
+        const layout = this.layouts[this.props.viewType] || this.layouts[ViewType.Tile];
         return this.renderLayout(layout);
     }
 

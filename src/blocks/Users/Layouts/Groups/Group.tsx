@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
 import UserModel from '../../../../model/userModel';
-import { HighlighterFunc } from '../ISearchStrategy';
+import { HighlighterFunc } from '../Common/SearchStrategy/ISearchStrategy';
+import SorterHelper, { ISortUsersInfo } from '../Common/SorterHelper';
 import "./Groups.scss";
 import UserPlate from './UserPlate';
 
-interface ISortedState {
-    users: UserModel[];
-    isSorted: boolean;
-    isDescending: boolean;
-}
-
-interface IGroupState extends ISortedState {
+interface IGroupState extends ISortUsersInfo {
     highlighter: HighlighterFunc; 
 }
 
@@ -29,7 +24,7 @@ export default class Group extends Component<IGroupProps, IGroupState> {
         this.state = {
             highlighter: props.highlighter,
             isDescending: false,
-            isSorted: false,
+            sortedFields: [],
             users: props.users
         };
 
@@ -38,8 +33,10 @@ export default class Group extends Component<IGroupProps, IGroupState> {
 
     public render() {
         const { header } = this.props;
-        const { users, isDescending, isSorted, highlighter } = this.state;
-        const headerSortedClass = isSorted ? (" group-header_sorted" + (isDescending ? "_desc" : "_asc")) : "";
+        const { users, isDescending, sortedFields, highlighter } = this.state;
+        const headerSortedClass = sortedFields.length 
+                                        ? (" group-header_sorted" + (isDescending ? "_desc" : "_asc")) 
+                                        : "";
         return (
             <li className="user-groups__group">
                 <div className="user-group-wrapper">
@@ -54,8 +51,17 @@ export default class Group extends Component<IGroupProps, IGroupState> {
     }
 
     public componentWillReceiveProps(newProps: IGroupProps) {
-        const { isDescending, isSorted, users } = this.state;
-        const updatedUsers = isSorted ? Group.getSortedState(newProps.users, isDescending).users : newProps.users;
+        const { isDescending, sortedFields, users } = this.state;
+        const sortInfo: ISortUsersInfo = {
+            isDescending,
+            sortedFields,
+            users: newProps.users
+        };
+        const updatedUsers = sortedFields.length 
+                                ? SorterHelper.sortUsers(sortInfo).users 
+                                : newProps.users;
+        sortInfo.users = updatedUsers;
+        
         const hasChanged = newProps.highlighter !== this.props.highlighter
                         || updatedUsers.length !== users.length 
                         || updatedUsers.some((user: UserModel, i: number) => users[i].id !== user.id);
@@ -66,34 +72,19 @@ export default class Group extends Component<IGroupProps, IGroupState> {
 
         this.setState({
             highlighter: newProps.highlighter,
-            isDescending,
-            isSorted,
-            users: updatedUsers
+            ...sortInfo
         });
     }
 
     private sort() {
-        const isDescending = this.state.isSorted ? !this.state.isDescending : false;
-        this.setState(Group.getSortedState(this.state.users, isDescending));
-    }
-
-    private static getSortedState(users: UserModel[], isDescending: boolean): ISortedState {
-
-        const comparer = isDescending ? 
-                                (a: UserModel, b: UserModel) => {
-                                    return a.name > b.name ? -1 : 1;
-                                }
-                            :
-                                (a: UserModel, b: UserModel) => {
-                                    return a.name > b.name ? 1 : -1;
-                                };
-       
-        const newState = {
+        const isDescending = this.state.sortedFields.length ? !this.state.isDescending : false;
+        const sortedFields = [ "name" ];
+        const sortInfo: ISortUsersInfo = {
             isDescending,
-            isSorted: true,
-            users: users.sort(comparer)
+            sortedFields,
+            users: this.props.users
         };
-
-        return newState;
+        SorterHelper.sortUsers(sortInfo);
+        this.setState(sortInfo);
     }
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import UserModel from '../../../model/userModel';
+import UserModel from '../../../../../model/userModel';
 
 export default interface ILayoutStrategy {
 
