@@ -20,7 +20,7 @@ export default class GroupsLayoutStrategy implements ILayoutStrategy {
     public setup(data: UserModel[], searchString?: string) {
 
         this.searchStrategy.setTargetText(searchString);
-        const groups: IUserGroup[] = [ { name: "Unmanaged", id: 0, users: [] }];
+        const groups: IUserGroup[] = [];
 
         for (const userModel of data) {
 
@@ -39,7 +39,7 @@ export default class GroupsLayoutStrategy implements ILayoutStrategy {
             let userGroup: IUserGroup;
             if (!targetGroup) {
                 userGroup = { name: userModel.group, id: userModel.groupId, users: [] };
-                groups.push(userGroup);
+                userGroup.id === 0 ? groups.unshift(userGroup) : groups.push(userGroup);
             } else {
                 userGroup = targetGroup;
             }
