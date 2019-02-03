@@ -51,7 +51,7 @@ export default class Tile extends Component<ITileProps, ITileState> {
         const pictureSrc = this.state.loaded ? picture : placeHolderImage;
         const groupClassName = "user-tile__group" + (groupId === 0 ? " user-tile__group_unmanaged" : "");
         return (
-            <li className="user-tiles__tile user-tile">
+            <li className={"user-tiles__tile user-tile" + (this.state.checked ? " user-tile_checked" : "")}>
                 <label className="user-tile__check-plate">
                     <input 
                         className="user-tile__check" 
