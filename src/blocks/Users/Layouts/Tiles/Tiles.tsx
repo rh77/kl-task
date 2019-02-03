@@ -102,7 +102,7 @@ export default class Tiles extends Component<ITilesProps, ITilesState> {
                 };
             }
         } else {
-            
+
             const greater = isDescending ? -1 : 1;
             const lower = isDescending ? 1 : -1;
             comparer = (a, b) => {
@@ -123,7 +123,7 @@ export default class Tiles extends Component<ITilesProps, ITilesState> {
         const newState = {
             isDescending,
             sortedFields: fields,
-            users: users.sort(comparer)
+            users: users.slice().sort(comparer)
         };
 
         return newState;
