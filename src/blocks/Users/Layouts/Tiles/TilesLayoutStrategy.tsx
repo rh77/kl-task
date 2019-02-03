@@ -25,6 +25,6 @@ export default class TilesLayoutStrategy implements ILayoutStrategy {
     public render() {
         
         const highlighter = this.searchStrategy.getHighlighterFunction();
-        return <Tiles users={this.users} highlighter={highlighter}/>;
+        return <Tiles users={this.users.slice()} highlighter={highlighter}/>;
     }
 }

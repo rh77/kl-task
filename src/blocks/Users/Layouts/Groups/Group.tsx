@@ -91,7 +91,7 @@ export default class Group extends Component<IGroupProps, IGroupState> {
         const newState = {
             isDescending,
             isSorted: true,
-            users: users.slice().sort(comparer)
+            users: users.sort(comparer)
         };
 
         return newState;

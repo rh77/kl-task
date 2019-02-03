@@ -123,7 +123,7 @@ export default class Tiles extends Component<ITilesProps, ITilesState> {
         const newState = {
             isDescending,
             sortedFields: fields,
-            users: users.slice().sort(comparer)
+            users: users.sort(comparer)
         };
 
         return newState;

@@ -24,6 +24,6 @@ export default class TableLayoutStrategy implements ILayoutStrategy {
 
     public render() {
         const highlighter = this.searchStrategy.getHighlighterFunction();
-        return <Table users={this.users} highlighter={highlighter}/>;
+        return <Table users={this.users.slice()} highlighter={highlighter}/>;
     }
 }

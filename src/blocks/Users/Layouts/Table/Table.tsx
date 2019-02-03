@@ -123,7 +123,7 @@ export default class Table extends Component<ITableProps, ITableState> {
         const newState = {
             isDescending,
             sortedField: field,
-            users: users.slice().sort(comparer)
+            users: users.sort(comparer)
         };
 
         return newState;
