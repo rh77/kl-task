@@ -38,10 +38,10 @@ export default class TilesLayoutStrategy implements ILayoutStrategy {
         const data = this.users.map((user) => this.renderTile(user, highlighter)).concat(this.placeholders);
 
         return (
-            <React.Fragment>
+            <div>
                 <SortSwitcher/>
                 <ul className="user-tiles">{data}</ul>
-            </React.Fragment>
+            </div>
             );
     }
 
