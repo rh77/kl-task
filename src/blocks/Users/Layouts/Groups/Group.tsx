@@ -18,6 +18,7 @@ interface IGroupProps {
     header: string;
     highlighter: HighlighterFunc; 
     users: UserModel[];
+    canAdd: boolean;
 }
 
 export default class Group extends Component<IGroupProps, IGroupState> {
@@ -46,7 +47,7 @@ export default class Group extends Component<IGroupProps, IGroupState> {
                     <ul className="user-plates-list">
                         {users.map((user) => <UserPlate key={user.id} userModel={user} highlighter={highlighter}/>)}
                     </ul>
-                    <label className="group-footer-label">Add user...</label>
+                    <label className="group-footer-label" hidden={!this.props.canAdd}>Add user...</label>
                 </div>
             </li>
         );

@@ -8,6 +8,7 @@ import "./Groups.scss";
 
 interface IUserGroup { 
     name: string; 
+    id: number;
     users: UserModel[];
 }
 
@@ -19,7 +20,7 @@ export default class GroupsLayoutStrategy implements ILayoutStrategy {
     public setup(data: UserModel[], searchString?: string) {
 
         this.searchStrategy.setTargetText(searchString);
-        const groups: IUserGroup[] = [];
+        const groups: IUserGroup[] = [ { name: "Unmanaged", id: 0, users: [] }];
 
         for (const userModel of data) {
 
@@ -29,7 +30,7 @@ export default class GroupsLayoutStrategy implements ILayoutStrategy {
 
             let targetGroup: IUserGroup | null = null;
             for (const group of groups) {
-                if (group.name === userModel.group) {
+                if (group.id === userModel.groupId) {
                     targetGroup = group;
                     break;
                 }
@@ -37,7 +38,7 @@ export default class GroupsLayoutStrategy implements ILayoutStrategy {
 
             let userGroup: IUserGroup;
             if (!targetGroup) {
-                userGroup = { name: userModel.group, users: [] };
+                userGroup = { name: userModel.group, id: userModel.groupId, users: [] };
                 groups.push(userGroup);
             } else {
                 userGroup = targetGroup;
@@ -58,7 +59,7 @@ export default class GroupsLayoutStrategy implements ILayoutStrategy {
     }
 
     private renderGroup(userGroup: IUserGroup, highlighter: HighlighterFunc): JSX.Element {
-        const { name, users } = userGroup;
-        return <Group key={name} header={name} users={users} highlighter={highlighter}/>;
+        const { name, id, users } = userGroup;
+        return <Group key={id} header={name} users={users} highlighter={highlighter} canAdd={id !== 0}/>;
     }
 }
