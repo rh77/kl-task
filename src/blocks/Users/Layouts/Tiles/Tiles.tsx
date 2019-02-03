@@ -50,7 +50,9 @@ export default class Tiles extends Component<ITilesProps, ITilesState> {
 
         return (
             <div>
-                <SortSwitcher onSort={this.sort}/>
+                <div className="settings-container">
+                    <SortSwitcher onSort={this.sort}/>
+                </div>
                 <ul className="user-tiles">{data}</ul>
             </div>
             );
