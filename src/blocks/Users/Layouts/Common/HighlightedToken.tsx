@@ -4,7 +4,11 @@ import "./HighlightedToken.scss";
 
 const HighlightedToken = (props: {token: IHighlightToken}): JSX.Element => {
     const token = props.token;
-    return <span>{token.isHighlighted ? <mark className="search-highlight">{token.text}</mark> : token.text}</span>;
+    if (token.isHighlighted) {
+        return <mark className="search-highlight">{token.text}</mark>;
+    } else {
+        return <React.Fragment>{token.text}</React.Fragment>;
+    }
 };
 
 export default HighlightedToken;

@@ -47,7 +47,7 @@ export default class Group extends Component<IGroupProps, IGroupState> {
                     <ul className="user-plates-list">
                         {users.map((user) => <UserPlate key={user.id} userModel={user} highlighter={highlighter}/>)}
                     </ul>
-                    <label className="group-footer-label" hidden={!this.props.canAdd}>Add user...</label>
+                    {this.props.canAdd ? <label className="group-footer-label">Add user...</label> : <React.Fragment/>}
                 </div>
             </li>
         );
