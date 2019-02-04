@@ -48,7 +48,8 @@ export default class SortSwitcher extends Component<ISortSwitcherProps, ISortSwi
     }
 
     private onFieldChange(e: React.ChangeEvent<HTMLSelectElement>) {
-        const fields = e.target.selectedOptions[0].value.split(',');
+        const value = e.target.selectedOptions[0].value;
+        const fields = value === "" ? [] : value.split(',');
         this.setState({ fields });
         const { isDescending } = this.state;
         this.props.onSort(isDescending, fields);

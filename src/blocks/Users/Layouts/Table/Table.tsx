@@ -79,7 +79,7 @@ export default class Table extends Component<ITableProps, ITableState> {
 
     public componentWillReceiveProps(newProps: ITableProps) {
 
-        const { isDescending, sortedFields, users } = this.state;
+        const { isDescending, sortedFields } = this.state;
         const sortInfo: ISortUsersInfo = {
             isDescending,
             sortedFields,
@@ -89,14 +89,6 @@ export default class Table extends Component<ITableProps, ITableState> {
                                 ? SorterHelper.sortUsers(sortInfo).users 
                                 : newProps.users;
         sortInfo.users = updatedUsers;
-
-        const hasChanged = newProps.highlighter !== this.props.highlighter
-                        || updatedUsers.length !== users.length 
-                        || updatedUsers.some((user: UserModel, i: number) => users[i].id !== user.id);
-
-        if (!hasChanged) {
-            return;
-        }
 
         this.setState({
             highlighter: newProps.highlighter,
