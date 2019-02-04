@@ -1,7 +1,7 @@
 {
   "main.css": "/kl-task/static/css/main.20bd72b5.chunk.css",
-  "main.js": "/kl-task/static/js/main.bc09ef34.chunk.js",
-  "main.js.map": "/kl-task/static/js/main.bc09ef34.chunk.js.map",
+  "main.js": "/kl-task/static/js/main.d3f197a0.chunk.js",
+  "main.js.map": "/kl-task/static/js/main.d3f197a0.chunk.js.map",
   "static/js/1.fb3a5d96.chunk.js": "/kl-task/static/js/1.fb3a5d96.chunk.js",
   "static/js/1.fb3a5d96.chunk.js.map": "/kl-task/static/js/1.fb3a5d96.chunk.js.map",
   "runtime~main.js": "/kl-task/static/js/runtime~main.9dc895c0.js",
@@ -10,6 +10,6 @@
   "static/media/LayoutSwitcher.scss": "/kl-task/static/media/tile-view.c0e4a0b3.svg",
   "static/css/main.20bd72b5.chunk.css.map": "/kl-task/static/css/main.20bd72b5.chunk.css.map",
   "index.html": "/kl-task/index.html",
-  "precache-manifest.2e0ff5625bbbb031e710944008a8f282.js": "/kl-task/precache-manifest.2e0ff5625bbbb031e710944008a8f282.js",
+  "precache-manifest.066e5b752acb5063ecb9fd5113fed282.js": "/kl-task/precache-manifest.066e5b752acb5063ecb9fd5113fed282.js",
   "service-worker.js": "/kl-task/service-worker.js"
 }
